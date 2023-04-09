@@ -25,11 +25,18 @@ const getEventDate = (dateString: string): Date => {
 
 const app = new Hono();
 
-app.get("/", (context) => context.text("Hello 🔥"));
+app.get("/", (context) => {
+  return context.text("Hello 🔥");
+});
 
 app.get("/ics", async (context) => {
+  const host = context.req.headers.get("host");
   const url = context.req.query("url");
   if (!url) {
+    return context.notFound();
+  }
+  // prevent redirect
+  if (url.startsWith(`https://${host}`)) {
     return context.notFound();
   }
   const response = await fetch(url);
