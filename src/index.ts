@@ -26,7 +26,39 @@ const getEventDate = (dateString: string): Date => {
 const app = new Hono();
 
 app.get("/", (context) => {
-  return context.text("Hello 🔥");
+  const host = context.req.headers.get("host");
+  const name = "everything-ics";
+  return context.html(
+    `<html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>${name}</title>
+      </head>
+      <body>
+        <h1>${name}</h1>
+        <h2>How to setup shortcut</h2>
+        <ol>
+          <li>Copy your Cloudflare Worker URL:<br><code>https://${host}</code></li>
+          <li>
+            Download
+            <a href="https://www.icloud.com/shortcuts/89d7146ce6be463eb2f4a039eed37a8a">
+              iOS Shortcut
+            </a> and add it to your iPhone.
+          </li>
+          <li>Set your Cloudflare Worker URL.</li>
+        </ol>
+        <h2>How to use</h2>
+        <ol>
+          <li>Open an event page on your browser.</li>
+          <li>Open Share Sheet and tap "${name}".<br>
+              In the first time, accept to access your Cloudflare Worker URL.</li>
+          <li>Add an event to your calendar.</li>
+        </ol>
+      </body>
+    </html>
+    `
+  );
 });
 
 app.get("/ics", async (context) => {
