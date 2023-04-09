@@ -1,0 +1,16 @@
+{
+  "name": "everything-ics",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev src/index.ts",
+    "deploy": "wrangler publish --minify src/index.ts"
+  },
+  "dependencies": {
+    "hono": "^3.1.5"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20221111.1",
+    "wrangler": "^2.7.1"
+  }
+}
