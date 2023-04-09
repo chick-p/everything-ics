@@ -5,6 +5,14 @@ type ICSEvent = {
 };
 const padZero = (n: number) => (n < 10 ? `0${n}` : `${n}`);
 
+const getDateOnly = (date: Date): string => {
+  return [
+    date.getFullYear(),
+    padZero(date.getMonth() + 1),
+    padZero(date.getDate()),
+  ].join("");
+};
+
 const getStandardDate = (date: Date): string => {
   return [
     date.getFullYear(),
@@ -26,8 +34,8 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 SUMMARY:${event.title}
-DTSTART;TZID=UTC;VALUE=DATE-TIME:${getStandardDate(event.date)}
-DTEND;TZID=UTC;VALUE=DATE-TIME:${getStandardDate(event.date)}
+DTSTART:${getDateOnly(event.date)}
+DTEND:${getDateOnly(event.date)}
 DTSTAMP;VALUE=DATE-TIME:${getStandardDate(currentDate)}
 CATEGORIES:
 CREATED;VALUE=DATE-TIME:${getStandardDate(currentDate)}
