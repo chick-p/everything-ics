@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 
+import { generateIcs } from "./ics";
 
 const extractRegex = (str: string, regex: RegExp): string => {
   const matcher = str.match(regex);
@@ -24,7 +25,17 @@ app.get("/ics", async (context) => {
   const body = await response.text();
   const title = extractRegex(body, /<title>(.*?)<\/title>/);
 
-  return context.text(title);
+  const ics = generateIcs({
+    title,
+    date: new Date(),
+    url,
+  });
+  console.log(ics)
+
+
+  return context.text(ics, 200, {
+    "Content-Type": "text/calendar; charset=utf8",
+  })
 });
 
 export default app;
