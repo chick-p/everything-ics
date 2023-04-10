@@ -7,7 +7,11 @@ export const extractRegex = (str: string, regex: RegExp): string => {
 };
 
 const getEventDate = (dateString: string): Date => {
-  const dateArray = dateString.split(/\s/).join().replace(/日/, "").split(/月/);
+  const dateArray = dateString
+    .split(/\s/)
+    .join("")
+    .replace(/日/, "")
+    .split(/月/);
   const [monthString, dayString] = dateArray;
   const date = new Date();
   date.setMonth(parseInt(monthString, 10) - 1);
