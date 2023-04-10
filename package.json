@@ -5,7 +5,13 @@
   "scripts": {
     "dev": "wrangler dev src/index.ts",
     "deploy": "wrangler publish --minify src/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "lint": "run-p lint:*",
+    "lint:prettier": "prettier --check .",
+    "lint:eslint": "eslint src/**/*.ts",
+    "fix": "run-s fix:*",
+    "fix:prettier": "prettier -w .",
+    "fix:eslint": "npm run lint:eslint --fix"
   },
   "dependencies": {
     "hono": "^3.1.5"
