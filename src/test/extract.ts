@@ -14,4 +14,10 @@ describe("extractDate", () => {
     const date = extractDate(body);
     expect(date).toEqual(new Date(currentYear, 3, 7));
   });
+
+  it("should return null without date string", () => {
+    const body = "今日は晴れです";
+    const date = extractDate(body);
+    expect(date).toEqual(null);
+  });
 });

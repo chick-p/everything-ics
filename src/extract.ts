@@ -25,5 +25,8 @@ const getEventDate = (dateString: string): Date => {
 
 export const extractDate = (body: string) => {
   const dateString = extractRegex(body, /(\d+\s*月\s*\d+\s*日)/);
+  if (!dateString) {
+    return null;
+  }
   return getEventDate(dateString);
 };
