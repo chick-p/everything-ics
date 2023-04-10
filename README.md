@@ -2,8 +2,8 @@
 
 ## Requirements
 
-* Cloudflare Worker
-* iOS Shortcut
+- Cloudflare Worker
+- iOS Shortcut
 
 ## Deploy
 
