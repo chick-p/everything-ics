@@ -6,7 +6,11 @@
     "esModuleInterop": true,
     "strict": true,
     "lib": ["esnext"],
-    "types": ["@cloudflare/workers-types", "@types/jest"],
+    "types": [
+      "@cloudflare/workers-types",
+      "@types/jest",
+      "jest-environment-miniflare/globals"
+    ],
     "jsx": "react-jsx",
     "jsxFragmentFactory": "Fragment",
     "jsxImportSource": "hono/jsx"
