@@ -73,6 +73,7 @@ app.get("/ics", async (context) => {
   }
   const response = await fetch(url);
   if (!response.ok) {
+    return context.notFound();
   }
   const body = await response.text();
 
