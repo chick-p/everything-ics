@@ -19,6 +19,7 @@ describe("GET /ics", () => {
     fetchMock.disableNetConnect();
     const origin = fetchMock.get(exampleServer);
     origin.intercept({ method: "GET", path: "/404" }).reply(404, "not found");
+    origin.intercept({ method: "GET", path: "/nodate" }).reply(200, "no date");
   });
 
   it("should be 404 when url is undefined", async () => {
@@ -30,6 +31,13 @@ describe("GET /ics", () => {
 
   it("should be 404 when url is 404", async () => {
     const res = await app.request(`${appServer}/ics?url=${exampleServer}/404`);
+    expect(res.status).toBe(404);
+  });
+
+  it("should be 404 when url has no date", async () => {
+    const res = await app.request(
+      `${appServer}/ics?url=${exampleServer}/nodate`
+    );
     expect(res.status).toBe(404);
   });
 });

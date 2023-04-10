@@ -60,6 +60,10 @@ app.get("/ics", async (context) => {
   const title = extractRegex(body, /<title>(.*?)<\/title>/);
   const date = extractDate(body);
 
+  if (!date) {
+    return context.notFound();
+  }
+
   const ics = generateIcs({
     title,
     date,
