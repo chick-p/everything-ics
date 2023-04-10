@@ -5,7 +5,13 @@
   "scripts": {
     "dev": "wrangler dev src/index.ts",
     "deploy": "wrangler publish --minify src/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "lint": "run-p lint:*",
+    "lint:prettier": "prettier --check .",
+    "lint:eslint": "eslint src/**/*.ts",
+    "fix": "run-s fix:*",
+    "fix:prettier": "prettier -w .",
+    "fix:eslint": "npm run lint:eslint --fix"
   },
   "dependencies": {
     "hono": "^3.1.5"
@@ -13,10 +19,16 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20221111.1",
     "@types/jest": "^29.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
     "esbuild": "^0.17.16",
     "esbuild-jest": "^0.5.0",
+    "eslint": "^8.38.0",
+    "eslint-config-prettier": "^8.8.0",
     "jest": "^29.5.0",
     "jest-environment-miniflare": "^2.13.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.7",
     "wrangler": "^2.7.1"
   }
 }
