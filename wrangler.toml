@@ -1,2 +1,5 @@
 name = "everything-ics"
 compatibility_date = "2023-04-09"
+
+[site]
+bucket = "./public"

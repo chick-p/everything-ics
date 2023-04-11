@@ -1,10 +1,13 @@
 import { Hono } from "hono";
+import { serveStatic } from "hono/cloudflare-workers";
 
 import { Home } from "./pages/home";
 import { generateIcs } from "./ics";
 import { extractDate, extractRegex } from "./extract";
 
 const app = new Hono();
+app.get("/static/*", serveStatic({ root: "./" }));
+
 const appName = "everything-ics";
 
 app.get("/", (context) => {
