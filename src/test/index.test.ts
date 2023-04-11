@@ -23,11 +23,30 @@ describe("GET /ics", () => {
     origin.intercept({ method: "GET", path: "/date" }).reply(200, "3月9日");
   });
 
-  it("should be 404 when url is undefined", async () => {
+  it("should be 400 when url is undefined", async () => {
     const res = await app.request(`${appServer}/ics`);
-    expect(res.status).toBe(404);
+    expect(res.status).toBe(400);
     const body = await res.text();
-    expect(body).toContain("404 Not Found");
+    expect(body).toContain("url parameter is required");
+  });
+
+  it("should be 400 when prevent redirect", async () => {
+    const host = "localhost";
+    const res = await app.request(`${appServer}/ics?url=http://${host}`, {
+      headers: {
+        host,
+      },
+    });
+    expect(res.status).toBe(400);
+    const body = await res.text();
+    expect(body).toContain("forbidden url");
+  });
+
+  it("should be 400 when pass bad url", async () => {
+    const res = await app.request(`${appServer}/ics?url=foo`);
+    expect(res.status).toBe(500);
+    const body = await res.text();
+    expect(body).toContain("bad url");
   });
 
   it("should be 404 when url is 404", async () => {
