@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { serveStatic } from "hono/cloudflare-workers";
+import { HTTPException } from "hono/http-exception";
 
 import { Home } from "./pages/home";
 import { generateIcs } from "./ics";
@@ -20,12 +21,21 @@ app.get("/ics", async (context) => {
   const host = context.req.headers.get("host");
   const url = context.req.query("url");
   if (!url) {
-    return context.notFound();
+    throw new HTTPException(400, { message: "url parameter is required" });
   }
+
   // prevent redirect
-  if (url.startsWith(`https://${host}`)) {
-    return context.notFound();
+  let passedHostName;
+  try {
+    const { hostname } = new URL(url);
+    passedHostName = hostname;
+  } catch (e) {
+    throw new HTTPException(500, { message: "bad url" });
   }
+  if (host === passedHostName) {
+    throw new HTTPException(400, { message: "forbidden url" });
+  }
+
   const response = await fetch(url);
   if (!response.ok) {
     return context.notFound();
