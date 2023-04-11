@@ -38,4 +38,34 @@ describe("extractDate", () => {
     const date = extractDate(body);
     expect(date).toEqual(new Date(2022, 11, 24));
   });
+
+  it("should return date with slashed date strings", () => {
+    const body = "今日は2022/12/25です";
+    const date = extractDate(body);
+    expect(date).toEqual(new Date(2022, 11, 25));
+  });
+
+  it("should return null with fraction strings", () => {
+    const body = "ケーキを3/4食べた";
+    const date = extractDate(body);
+    expect(date).toEqual(null);
+  });
+
+  it("should return null with white spaces included slashed strings", () => {
+    const body = "今日は2022 / 12 / 25です";
+    const date = extractDate(body);
+    expect(date).toEqual(null);
+  });
+
+  it("should return full date with slashed date and full date strings", () => {
+    const body = "今日は2022/12/25で明日は2022年12月26日です";
+    const date = extractDate(body);
+    expect(date).toEqual(new Date(2022, 11, 26));
+  });
+
+  it("should return short date with slashed date and short date strings", () => {
+    const body = "今日は2022/12/25で明日は12月26日です";
+    const date = extractDate(body);
+    expect(date).toEqual(new Date(currentYear, 11, 26));
+  });
 });
