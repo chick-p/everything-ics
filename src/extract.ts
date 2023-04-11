@@ -6,16 +6,27 @@ export const extractRegex = (str: string, regex: RegExp): string => {
   return "";
 };
 
-const getEventDate = (dateString: string): Date => {
-  if (!dateString.includes("年")) {
-    const currentYear = new Date().getFullYear();
-    dateString = `${currentYear}年${dateString}`;
+const hasYearString = (dateString: string): boolean => {
+  if (dateString.includes("年")) {
+    return true;
   }
-  const dateArray = dateString
+  if (extractRegex(dateString, /(^\d{4})\//)) {
+    return true;
+  }
+  return false;
+};
+
+const getEventDate = (dateString: string): Date => {
+  let fullDateString = dateString;
+  if (!hasYearString(dateString)) {
+    const currentYear = new Date().getFullYear();
+    fullDateString = `${currentYear}年${dateString}`;
+  }
+  const dateArray = fullDateString
     .split(/\s/)
     .join("")
     .replace(/日/, "")
-    .split(/年|月/);
+    .split(/年|月|\//);
   const [yearString, monthString, dayString] = dateArray;
   const date = new Date(
     Number(yearString),
@@ -33,6 +44,10 @@ export const extractDate = (body: string) => {
   const dateString = extractRegex(body, /(\d+\s*月\s*\d+\s*日)/);
   if (dateString) {
     return getEventDate(dateString);
+  }
+  const slashedDateString = extractRegex(body, /(\d{4}\/\d{1,2}\/\d{1,2})/);
+  if (slashedDateString) {
+    return getEventDate(slashedDateString);
   }
   return null;
 };
