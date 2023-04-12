@@ -6,6 +6,10 @@ export const extractRegex = (str: string, regex: RegExp): string => {
   return "";
 };
 
+export const getEventName = (body: string): string => {
+  return extractRegex(body, /<title>(.*?)<\/title>/);
+};
+
 const hasYearString = (dateString: string): boolean => {
   if (dateString.includes("年")) {
     return true;
