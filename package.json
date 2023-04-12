@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "build:tailwind": "tailwindcss build src/styles.css -o public/static/css/styles.css",
     "dev": "wrangler dev src/index.ts",
-    "deploy": "wrangler publish --minify src/index.ts",
+    "deploy": "npm run build:tailwind && wrangler publish --minify src/index.ts",
     "test": "jest",
     "lint": "run-p lint:*",
     "lint:prettier": "prettier --check .",
@@ -14,7 +15,8 @@
     "fix:eslint": "npm run lint:eslint --fix"
   },
   "dependencies": {
-    "hono": "^3.1.5"
+    "hono": "^3.1.5",
+    "tailwindcss": "^3.3.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20221111.1",
