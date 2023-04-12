@@ -22,7 +22,7 @@ const dateList = (props: { date: Date }) => {
 };
 
 const content = ({ title, candidateDates, url }: Event) => html`
-  <main>
+  <section>
     <form action="/ics" method="POST">
       <div>
         <label for="title">Title</label>
@@ -32,20 +32,21 @@ const content = ({ title, candidateDates, url }: Event) => html`
           type="text"
           value="${title}"
           placeholder="title"
+          class="c-input"
         />
       </div>
       <div>
         <label for="date">Date</label>
-        <select name="date" id="date">
+        <select name="date" id="date" class="c-input">
           ${candidateDates.map((date) => dateList({ date }))}
         </select>
       </div>
       <input name="url" type="hidden" value="${url}" />
       <div>
-        <button type="submit">Generate ics</button>
+        <button type="submit" class="c-button">Generate ics</button>
       </div>
     </form>
-  </main>
+  </section>
 `;
 
 export const Edit = (props: { event: Event; appName: string }) => {

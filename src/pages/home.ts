@@ -2,7 +2,7 @@ import { html } from "hono/html";
 import { Layout } from "../components/Layout";
 
 const content = (props: { host: string; appName: string }) => html`
-  <main>
+  <section>
     <h2>How to setup shortcut</h2>
     <ol>
       <li>
@@ -30,7 +30,7 @@ const content = (props: { host: string; appName: string }) => html`
       </li>
       <li>Add an event to your calendar.</li>
     </ol>
-  </main>
+  </section>
 `;
 
 export const Home = (props: { appName: string; host: string }) => {

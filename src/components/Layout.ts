@@ -12,7 +12,9 @@ export const Layout = (props: {
       <link rel="stylesheet" href="/static/css/styles.css" />
     </head>
     <body>
-      <h1>${props.title}</h1>
-      ${props.children}
+      <main class="c-main">
+        <h1>🗓️ ${props.title}</h1>
+        ${props.children}
+      </main>
     </body>
   </html>`;
