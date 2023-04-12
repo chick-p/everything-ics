@@ -1,4 +1,24 @@
-import { getFirstEventDate } from "../extract";
+import { getEventName, getFirstEventDate } from "../extract";
+
+describe("getEventName", () => {
+  it("should return event name", () => {
+    const body = "<title>イベント名</title>";
+    const eventName = getEventName(body);
+    expect(eventName).toEqual("イベント名");
+  });
+
+  it("should return empty string when title is not set", () => {
+    const body = "<title></title>";
+    const eventName = getEventName(body);
+    expect(eventName).toEqual("");
+  });
+
+  it("should return empty string when title is not found", () => {
+    const body = "<h1>イベント名</h1>";
+    const eventName = getEventName(body);
+    expect(eventName).toEqual("");
+  });
+});
 
 describe("getFirstEventDate", () => {
   const currentYear = new Date().getFullYear();
