@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build:tailwind": "tailwindcss build src/styles.css -o public/static/css/styles.css",
-    "dev": "wrangler dev src/index.ts",
-    "deploy": "npm run build:tailwind && wrangler publish --minify src/index.ts",
+    "dev": "wrangler dev",
+    "deploy": "npm run build:tailwind && wrangler publish --minify",
     "test": "jest",
     "lint": "run-p lint:*",
     "lint:prettier": "prettier --check .",

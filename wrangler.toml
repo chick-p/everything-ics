@@ -1,5 +1,6 @@
 name = "everything-ics"
 compatibility_date = "2023-04-09"
+main = "src/index.ts"
 
 [site]
 bucket = "./public"
