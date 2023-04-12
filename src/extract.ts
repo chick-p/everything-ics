@@ -36,18 +36,24 @@ const getEventDate = (dateString: string): Date => {
   return date;
 };
 
-export const extractDate = (body: string) => {
+export const extractDates = (body: string) => {
+  let dates: Array<Date> = [];
   const fullDateString = extractRegex(body, /(\d+\s*年\s*\d+\s*月\s*\d+\s*日)/);
   if (fullDateString) {
-    return getEventDate(fullDateString);
+    dates = dates.concat(getEventDate(fullDateString));
   }
   const dateString = extractRegex(body, /(\d+\s*月\s*\d+\s*日)/);
   if (dateString) {
-    return getEventDate(dateString);
+    dates = dates.concat(getEventDate(dateString));
   }
   const slashedDateString = extractRegex(body, /(\d{4}\/\d{1,2}\/\d{1,2})/);
   if (slashedDateString) {
-    return getEventDate(slashedDateString);
+    dates = dates.concat(getEventDate(slashedDateString));
   }
-  return null;
+  return dates;
+};
+
+export const getFirstEventDate = (body: string) => {
+  const eventDates = extractDates(body);
+  return eventDates?.[0] || null;
 };
