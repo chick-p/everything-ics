@@ -1,6 +1,6 @@
 type ICSEvent = {
   title: string;
-  date: Date;
+  date: string;
   url: string;
 };
 const padZero = (n: number) => (n < 10 ? `0${n}` : `${n}`);
@@ -25,22 +25,27 @@ const getStandardDate = (date: Date): string => {
   ].join("");
 };
 
-export const generateIcs = (event: ICSEvent) => {
+export const generateIcs = ({
+  title,
+  date,
+  url,
+}: Record<"title" | "date" | "url", string>) => {
   const currentDate = new Date();
+  const eventDate = new Date(date);
   return `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//everything-ics//everything-ics//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
-SUMMARY:${event.title}
-DTSTART:${getDateOnly(event.date)}
-DTEND:${getDateOnly(event.date)}
+SUMMARY:${title}
+DTSTART:${getDateOnly(eventDate)}
+DTEND:${getDateOnly(eventDate)}
 DTSTAMP;VALUE=DATE-TIME:${getStandardDate(currentDate)}
 CATEGORIES:
 CREATED;VALUE=DATE-TIME:${getStandardDate(currentDate)}
 DESCRIPTION:
-URL:${event.url}
+URL:${url}
 END:VEVENT
 END:VCALENDAR`;
 };
