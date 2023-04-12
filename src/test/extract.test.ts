@@ -1,21 +1,25 @@
-import { getEventName, getFirstEventDate } from "../extract";
+import {
+  extractEventDates,
+  extractEventName,
+  getFirstEventDate,
+} from "../extract";
 
-describe("getEventName", () => {
+describe("extractEventName", () => {
   it("should return event name", () => {
     const body = "<title>イベント名</title>";
-    const eventName = getEventName(body);
+    const eventName = extractEventName(body);
     expect(eventName).toEqual("イベント名");
   });
 
   it("should return empty string when title is not set", () => {
     const body = "<title></title>";
-    const eventName = getEventName(body);
+    const eventName = extractEventName(body);
     expect(eventName).toEqual("");
   });
 
   it("should return empty string when title is not found", () => {
     const body = "<h1>イベント名</h1>";
-    const eventName = getEventName(body);
+    const eventName = extractEventName(body);
     expect(eventName).toEqual("");
   });
 });
@@ -87,5 +91,18 @@ describe("getFirstEventDate", () => {
     const body = "今日は2022/12/25で明日は12月26日です";
     const date = getFirstEventDate(body);
     expect(date).toEqual(new Date(currentYear, 11, 26));
+  });
+});
+
+describe("extractEventDates", () => {
+  const currentYear = new Date().getFullYear();
+
+  it("should return in order japanase full date, short date and slashed date", () => {
+    const body =
+      "今日は2022/12/25で明日は12月26日です、来年の同日は2023年12月25日です";
+    const dates = extractEventDates(body);
+    expect(dates[0]).toEqual(new Date(2023, 11, 25));
+    expect(dates[1]).toEqual(new Date(currentYear, 11, 26));
+    expect(dates[2]).toEqual(new Date(2022, 11, 25));
   });
 });

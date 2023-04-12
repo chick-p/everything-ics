@@ -3,8 +3,9 @@ import { serveStatic } from "hono/cloudflare-workers";
 import { HTTPException } from "hono/http-exception";
 
 import { Home } from "./pages/home";
+import { Edit } from "./pages/edit";
 import { generateIcs } from "./ics";
-import { getFirstEventDate, getEventName } from "./extract";
+import { extractEventDates, extractEventName } from "./extract";
 
 const app = new Hono();
 app.get("/static/*", serveStatic({ root: "./" }));
@@ -42,10 +43,30 @@ app.get("/ics", async (context) => {
   }
   const body = await response.text();
 
-  const title = getEventName(body);
-  const date = getFirstEventDate(body);
-  if (!date) {
+  const title = extractEventName(body);
+  const dates = extractEventDates(body);
+  if (!dates || dates.length === 0) {
     return context.notFound();
+  }
+  const event = {
+    title,
+    candidateDates: dates,
+    url,
+  };
+
+  const htmlContent = Edit({ appName, event });
+  return context.html(htmlContent);
+});
+
+app.post("/ics", async (context) => {
+  const { title, date, url } = await context.req.parseBody();
+
+  if (
+    typeof title !== "string" ||
+    typeof date !== "string" ||
+    typeof url !== "string"
+  ) {
+    throw new HTTPException(400, { message: "bad request" });
   }
 
   const ics = generateIcs({

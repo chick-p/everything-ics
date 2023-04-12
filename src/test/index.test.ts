@@ -65,6 +65,29 @@ describe("GET /ics", () => {
     const res = await app.request(`${appServer}/ics?url=${exampleServer}/date`);
     expect(res.status).toBe(200);
     const body = await res.text();
+    expect(body).toContain("Generate ics");
+  });
+});
+
+describe("POST /ics", () => {
+  it("should be generate ics when pass date and title", async () => {
+    const title = "Birthday";
+    const date = "2023-04-07T12:00:00.000";
+    const url = `${exampleServer}/date`;
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("date", date);
+    formData.append("url", url);
+    const req = new Request(`${appServer}/ics`, {
+      method: "POST",
+      body: formData,
+    });
+    const res = await app.request(req);
+    expect(res.status).toBe(200);
+    const body = await res.text();
     expect(body).toContain("VCALENDAR");
+    expect(body).toContain(`SUMMARY:${title}`);
+    expect(body).toContain(`DTSTART:20230407`);
+    expect(body).toContain(`URL:${url}`);
   });
 });

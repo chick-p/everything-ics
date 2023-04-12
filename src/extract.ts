@@ -6,7 +6,7 @@ export const extractRegex = (str: string, regex: RegExp): string => {
   return "";
 };
 
-export const getEventName = (body: string): string => {
+export const extractEventName = (body: string): string => {
   return extractRegex(body, /<title>(.*?)<\/title>/);
 };
 
@@ -40,7 +40,7 @@ const getEventDate = (dateString: string): Date => {
   return date;
 };
 
-export const extractDates = (body: string) => {
+export const extractEventDates = (body: string) => {
   let dates: Array<Date> = [];
   const fullDateString = extractRegex(body, /(\d+\s*年\s*\d+\s*月\s*\d+\s*日)/);
   if (fullDateString) {
@@ -58,6 +58,6 @@ export const extractDates = (body: string) => {
 };
 
 export const getFirstEventDate = (body: string) => {
-  const eventDates = extractDates(body);
+  const eventDates = extractEventDates(body);
   return eventDates?.[0] || null;
 };
