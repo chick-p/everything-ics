@@ -4,7 +4,7 @@ import { HTTPException } from "hono/http-exception";
 
 import { Home } from "./pages/home";
 import { generateIcs } from "./ics";
-import { extractDate, extractRegex } from "./extract";
+import { getFirstEventDate, extractRegex } from "./extract";
 
 const app = new Hono();
 app.get("/static/*", serveStatic({ root: "./" }));
@@ -43,8 +43,7 @@ app.get("/ics", async (context) => {
   const body = await response.text();
 
   const title = extractRegex(body, /<title>(.*?)<\/title>/);
-  const date = extractDate(body);
-
+  const date = getFirstEventDate(body);
   if (!date) {
     return context.notFound();
   }
