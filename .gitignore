@@ -1,1 +1,4 @@
 node_modules/
+
+# build output
+public/static/css/styles.css
