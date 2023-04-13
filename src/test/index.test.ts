@@ -14,7 +14,7 @@ describe("GET /", () => {
 
 describe("GET /ics", () => {
   beforeAll(() => {
-    // mock cloudflare worker fetch
+    // mock cloudflare workers fetch
     const fetchMock = getMiniflareFetchMock();
     fetchMock.disableNetConnect();
     const origin = fetchMock.get(exampleServer);
