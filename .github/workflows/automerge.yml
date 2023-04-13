@@ -5,6 +5,14 @@ on:
     types:
       - opened
       - reopened
+    paths:
+      - "package.json"
+      - "package-lock.json"
+
+permissions:
+  contents: read
+  pull-requests: write
+  repository-projects: write
 
 jobs:
   lint:
