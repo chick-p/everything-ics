@@ -41,20 +41,20 @@ const getEventDate = (dateString: string): Date => {
 };
 
 export const extractEventDates = (body: string) => {
-  let dates: Array<Date> = [];
+  let dates: Set<Date> = new Set();
   const fullDateString = extractRegex(body, /(\d+\s*年\s*\d+\s*月\s*\d+\s*日)/);
   if (fullDateString) {
-    dates = dates.concat(getEventDate(fullDateString));
+    dates = dates.add(getEventDate(fullDateString));
   }
   const dateString = extractRegex(body, /(\d+\s*月\s*\d+\s*日)/);
   if (dateString) {
-    dates = dates.concat(getEventDate(dateString));
+    dates = dates.add(getEventDate(dateString));
   }
   const slashedDateString = extractRegex(body, /(\d{4}\/\d{1,2}\/\d{1,2})/);
   if (slashedDateString) {
-    dates = dates.concat(getEventDate(slashedDateString));
+    dates = dates.add(getEventDate(slashedDateString));
   }
-  return dates;
+  return Array.from(dates);
 };
 
 export const getFirstEventDate = (body: string) => {
