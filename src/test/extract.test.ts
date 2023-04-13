@@ -2,6 +2,7 @@ import {
   extractEventDates,
   extractEventName,
   getFirstEventDate,
+  sortDateByAsc,
 } from "../extract";
 
 describe("extractEventName", () => {
@@ -104,5 +105,19 @@ describe("extractEventDates", () => {
     expect(dates[0]).toEqual(new Date(2023, 11, 25));
     expect(dates[1]).toEqual(new Date(currentYear, 11, 26));
     expect(dates[2]).toEqual(new Date(2022, 11, 25));
+  });
+});
+
+describe("sortDateByAsc", () => {
+  it("should return sorted dates by asc", () => {
+    const dates = [
+      new Date(2022, 11, 27),
+      new Date(2022, 11, 25),
+      new Date(2022, 11, 26),
+    ];
+    const sortedDates = sortDateByAsc(dates);
+    expect(sortedDates[0]).toEqual(new Date(2022, 11, 25));
+    expect(sortedDates[1]).toEqual(new Date(2022, 11, 26));
+    expect(sortedDates[2]).toEqual(new Date(2022, 11, 27));
   });
 });
