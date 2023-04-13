@@ -6,7 +6,7 @@ const content = (props: { host: string; appName: string }) => html`
     <h2>How to setup shortcut</h2>
     <ol>
       <li>
-        Copy your Cloudflare Worker URL:
+        Copy your Cloudflare Workers URL:
         <br />
         <code>https://${props.host}</code>
       </li>
@@ -18,7 +18,7 @@ const content = (props: { host: string; appName: string }) => html`
         >
         and add it to your iPhone.
       </li>
-      <li>Set your Cloudflare Worker URL.</li>
+      <li>Set your Cloudflare Workers URL.</li>
     </ol>
     <h2>How to use</h2>
     <ol>
@@ -26,7 +26,7 @@ const content = (props: { host: string; appName: string }) => html`
       <li>
         Open Share Sheet and tap "${props.appName}".
         <br />
-        In the first time, accept to access your Cloudflare Worker URL.
+        In the first time, accept to access your Cloudflare Workers URL.
       </li>
       <li>Add an event to your calendar.</li>
     </ol>
