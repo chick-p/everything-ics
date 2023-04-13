@@ -106,6 +106,12 @@ describe("extractEventDates", () => {
     expect(dates[1]).toEqual(new Date(currentYear, 11, 26));
     expect(dates[2]).toEqual(new Date(2022, 11, 25));
   });
+
+  it("should return no duplicated dates", () => {
+    const body = "今日は12/25で、クリスマスは12月25日です";
+    const dates = extractEventDates(body);
+    expect(dates.length).toEqual(1);
+  });
 });
 
 describe("sortDateByAsc", () => {
