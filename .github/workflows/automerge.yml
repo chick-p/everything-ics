@@ -5,6 +5,9 @@ on:
     types:
       - opened
       - reopened
+    paths:
+      - "package.json"
+      - "package-lock.json"
 
 permissions:
   contents: read
