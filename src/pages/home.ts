@@ -13,7 +13,7 @@ const content = (props: { host: string; appName: string }) => html`
       <li>
         Download
         <a
-          href="https://www.icloud.com/shortcuts/89d7146ce6be463eb2f4a039eed37a8a"
+          href="https://www.icloud.com/shortcuts/607d5d4edde1496993eb0d839544aca2"
           >iOS Shortcut</a
         >
         and add it to your iPhone.
