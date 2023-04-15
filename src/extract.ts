@@ -64,3 +64,5 @@ export const getFirstEventDate = (body: string) => {
 
 export const sortDateByAsc = (dates: Array<Date>) =>
   dates.sort((a, b) => (a > b ? 1 : -1));
+
+export const escapeNewline = (str: string) => str.replace(/\r|\n/g, "");

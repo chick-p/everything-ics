@@ -1,4 +1,5 @@
 import {
+  escapeNewline,
   extractEventDates,
   extractEventName,
   getFirstEventDate,
@@ -125,5 +126,25 @@ describe("sortDateByAsc", () => {
     expect(sortedDates[0]).toEqual(new Date(2022, 11, 25));
     expect(sortedDates[1]).toEqual(new Date(2022, 11, 26));
     expect(sortedDates[2]).toEqual(new Date(2022, 11, 27));
+  });
+});
+
+describe("escapeNewline", () => {
+  it("should return escaped string when with LF", () => {
+    const url = "https://example.com\n";
+    const escapedUrl = escapeNewline(url);
+    expect(escapedUrl).toEqual("https://example.com");
+  });
+
+  it("should return escaped string when with CR", () => {
+    const url = "https://example.com\r";
+    const escapedUrl = escapeNewline(url);
+    expect(escapedUrl).toEqual("https://example.com");
+  });
+
+  it("should return escaped string when with CR+LF", () => {
+    const url = "https://example.com\r\n";
+    const escapedUrl = escapeNewline(url);
+    expect(escapedUrl).toEqual("https://example.com");
   });
 });
