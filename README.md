@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Cloudflare Worker
+- Cloudflare Workers
 - iOS Shortcut
 
 ## Deploy
@@ -23,9 +23,9 @@ Published everything-ics (0.31 sec)
 ...
 ```
 
-Your Cloudflare Worker URL is as follows:  
+Your Cloudflare Workers URL is as follows:  
 `https://everything-ics.YOUR_WORKER_ID.workers.dev`
 
 ## Usage
 
-Access to your Cloudflare Worker URL.
+Access to your Cloudflare Workers URL.
