@@ -8,7 +8,7 @@ const content = (props: { host: string; appName: string }) => html`
       <li>
         Copy your Cloudflare Workers URL:
         <br />
-        <code>https://${props.host}</code>
+        <a href="https://${props.host}">https://${props.host}</a>
       </li>
       <li>
         Download

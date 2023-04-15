@@ -47,6 +47,10 @@ select {
   @apply focus:ring-blue-500 focus:border-blue-500;
 }
 
+a {
+  @apply text-blue-600 underline;
+}
+
 @layer components {
   .c-main {
     @apply p-8;
