@@ -5,7 +5,7 @@ import { HTTPException } from "hono/http-exception";
 import { Home } from "./pages/home";
 import { Edit } from "./pages/edit";
 import { generateIcs } from "./ics";
-import { extractEventDates, extractEventName } from "./extract";
+import { escapeNewline, extractEventDates, extractEventName } from "./extract";
 
 const app = new Hono();
 app.get("/static/*", serveStatic({ root: "./" }));
@@ -25,10 +25,12 @@ app.get("/ics", async (context) => {
     throw new HTTPException(400, { message: "url parameter is required" });
   }
 
+  const escapedUrl = escapeNewline(url);
+
   // prevent redirect
   let passedHostName;
   try {
-    const { hostname } = new URL(url);
+    const { hostname } = new URL(escapedUrl);
     passedHostName = hostname;
   } catch (e) {
     throw new HTTPException(500, { message: "bad url" });
@@ -37,7 +39,7 @@ app.get("/ics", async (context) => {
     throw new HTTPException(400, { message: "forbidden url" });
   }
 
-  const response = await fetch(url);
+  const response = await fetch(escapedUrl);
   if (!response.ok) {
     return context.notFound();
   }
@@ -51,7 +53,7 @@ app.get("/ics", async (context) => {
   const event = {
     title,
     candidateDates: dates,
-    url,
+    url: escapedUrl,
   };
 
   const htmlContent = Edit({ appName, event });
@@ -70,7 +72,7 @@ app.post("/ics", async (context) => {
   }
 
   const ics = generateIcs({
-    title,
+    title: escapeNewline(title),
     date,
     url,
   });
