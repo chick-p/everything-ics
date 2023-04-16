@@ -48,20 +48,23 @@ export const formattedDate = (date: Date) => {
 };
 
 export const extractEventDates = (body: string) => {
-  let dates: Set<Date> = new Set();
+  const dateMap: Record<string, Date> = {};
   const fullDateString = extractRegex(body, /(\d+\s*年\s*\d+\s*月\s*\d+\s*日)/);
   if (fullDateString) {
-    dates = dates.add(getEventDate(fullDateString));
+    const date = getEventDate(fullDateString);
+    dateMap[formattedDate(date)] = date;
   }
   const dateString = extractRegex(body, /(\d+\s*月\s*\d+\s*日)/);
   if (dateString) {
-    dates = dates.add(getEventDate(dateString));
+    const date = getEventDate(dateString);
+    dateMap[formattedDate(date)] = date;
   }
   const slashedDateString = extractRegex(body, /(\d{4}\/\d{1,2}\/\d{1,2})/);
   if (slashedDateString) {
-    dates = dates.add(getEventDate(slashedDateString));
+    const date = getEventDate(slashedDateString);
+    dateMap[formattedDate(date)] = date;
   }
-  return Array.from(dates);
+  return Object.values(dateMap);
 };
 
 export const getFirstEventDate = (body: string) => {
