@@ -1,6 +1,6 @@
 {
   "name": "everything-ics",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "build:tailwind": "tailwindcss build src/styles.css -o public/static/css/styles.css",
