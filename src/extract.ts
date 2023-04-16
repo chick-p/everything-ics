@@ -40,6 +40,13 @@ const getEventDate = (dateString: string): Date => {
   return date;
 };
 
+export const formattedDate = (date: Date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${year}年${month}月${day}日`;
+};
+
 export const extractEventDates = (body: string) => {
   let dates: Set<Date> = new Set();
   const fullDateString = extractRegex(body, /(\d+\s*年\s*\d+\s*月\s*\d+\s*日)/);

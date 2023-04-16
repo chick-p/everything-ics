@@ -1,18 +1,11 @@
 import { html } from "hono/html";
 import { Layout } from "../components/Layout";
-import { sortDateByAsc } from "../extract";
+import { formattedDate, sortDateByAsc } from "../extract";
 
 type Event = {
   title: string;
   candidateDates: Array<Date>;
   url: string;
-};
-
-const formattedDate = (date: Date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  return `${year}年${month}月${day}日`;
 };
 
 const dateList = (props: { date: Date; highPriorityDate: Date }) => {
