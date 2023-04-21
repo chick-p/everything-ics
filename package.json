@@ -15,8 +15,7 @@
     "fix:eslint": "npm run lint:eslint --fix"
   },
   "dependencies": {
-    "hono": "^3.1.6",
-    "tailwindcss": "^3.3.1"
+    "hono": "^3.1.6"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20221111.1",
