@@ -9,9 +9,11 @@
     "lint": "run-p lint:*",
     "lint:prettier": "prettier --check .",
     "lint:eslint": "eslint src/**/*.ts",
+    "lint:stylelint": "stylelint public/**/*.css --ignore-path .stylelintignore",
     "fix": "run-s fix:*",
     "fix:prettier": "prettier -w .",
-    "fix:eslint": "npm run lint:eslint --fix"
+    "fix:eslint": "npm run lint:eslint --fix",
+    "fix:stylelint": "npm run lint:stylelint -- --fix"
   },
   "dependencies": {
     "hono": "^3.1.6"
@@ -29,6 +31,8 @@
     "jest-environment-miniflare": "^2.13.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.7",
+    "stylelint": "^15.5.0",
+    "stylelint-config-standard": "^33.0.0",
     "wrangler": "^2.16.0"
   }
 }
