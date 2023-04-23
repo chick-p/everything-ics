@@ -27,14 +27,14 @@ const buildDateSection = (dates: Array<Date>, highPriorityDate: Date) => {
           ${dates.map((date) => dateList({ date, highPriorityDate }))}
         </select>
       </div>
-      <div class="c-date-to">
+      <div class="c-date-to hidden">
         <label for="date-to" class="c-date-to--label">To</label>
         <select name="to" id="date-to" class="c-date--select spacer">
           ${dates.map((date) => dateList({ date, highPriorityDate }))}
         </select>
       </div>
     </div>
-    <div style="display: ${hasMultiCandidates ? "block" : "none"}">
+    <div class="${hasMultiCandidates ? `` : `hidden`}">
       <div class="c-multiple-dates">
         <label class="c-multiple-dates--toggle">
           <input

@@ -85,6 +85,10 @@ a {
   margin: 0.75rem 0 0;
 }
 
+.hidden {
+  display: none;
+}
+
 .c-date-from,
 .c-date-to {
   margin: 0.75rem 0 0;
@@ -122,10 +126,6 @@ a {
   --tw-ring-color: var(--color-blue);
 
   border-color: var(--color-blue);
-}
-
-.c-date-to {
-  display: none;
 }
 
 .c-multiple-dates {
