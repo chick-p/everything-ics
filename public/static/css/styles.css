@@ -3,6 +3,9 @@
   --color-white: #f9fafb;
   --color-gray: #ccc;
   --color-blue: #3b82f6;
+  --color-light-coral: #feebeb;
+  --color-coral: #fc8281;
+  --color-dark-coral: #c53130;
   --color-light-teal: #daeeed;
   --color-teal: #6dbeb7;
   --color-dark-teal: #0d9488;
@@ -92,6 +95,17 @@ a {
 
 .c-main li {
   margin: 0.5rem 0 0;
+}
+
+.c-message {
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.c-message--error {
+  border: 1px solid var(--color-coral);
+  background-color: var(--color-light-coral);
+  color: var(--color-dark-coral);
 }
 
 .c-title--label,

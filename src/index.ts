@@ -6,11 +6,13 @@ import { Home } from "./pages/home";
 import { Edit } from "./pages/edit";
 import { generateIcs } from "./ics";
 import { escapeNewline, extractEventDates, extractEventName } from "./extract";
+import { isValidPeriod } from "./date";
 
 const app = new Hono();
 app.get("/static/*", serveStatic({ root: "./" }));
 
 const appName = "everything-ics";
+const cookieNameForError = `_${appName}_flash_error`;
 
 app.get("/", (context) => {
   const host = context.req.headers.get("host") || "";
@@ -21,6 +23,8 @@ app.get("/", (context) => {
 app.get("/ics", async (context) => {
   const host = context.req.headers.get("host");
   const url = context.req.query("url");
+  const error = context.req.cookie(cookieNameForError) || "";
+  context.cookie(cookieNameForError, "");
   if (!url) {
     throw new HTTPException(400, { message: "url parameter is required" });
   }
@@ -55,8 +59,7 @@ app.get("/ics", async (context) => {
     candidateDates: dates,
     url: escapedUrl,
   };
-
-  const htmlContent = Edit({ appName, event });
+  const htmlContent = Edit({ appName, event }, error);
   return context.html(htmlContent);
 });
 
@@ -87,6 +90,10 @@ app.post("/ics", async (context) => {
       url,
     });
   } else {
+    if (!isValidPeriod(from, to)) {
+      context.cookie(cookieNameForError, "'From' must be before 'To'.");
+      return context.redirect(`/ics?url=${url}`, 301);
+    }
     ics = generateIcs({
       title: escapeNewline(title),
       from,

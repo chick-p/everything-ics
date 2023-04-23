@@ -18,7 +18,6 @@ const dateList = (props: { date: Date; highPriorityDate: Date }) => {
   </option>`;
 };
 
-const content = ({ title, candidateDates, url }: Event) => {
 const buildDateSection = (dates: Array<Date>, highPriorityDate: Date) => {
   const hasMultiCandidates = dates.length > 1;
   return html`<div>
@@ -51,10 +50,19 @@ const buildDateSection = (dates: Array<Date>, highPriorityDate: Date) => {
       </div>
     </div>`;
 };
+const buildErrorMessage = (error: string) => html`<div
+  class="c-message c-message--error"
+  role="alert"
+>
+  <span>${error}</span>
+</div>`;
+
+const content = ({ title, candidateDates, url }: Event, error: string) => {
   const highPriorityDate = candidateDates[0];
   const sortDates = sortDateByAsc(candidateDates);
   return html`
     <section>
+      ${error ? buildErrorMessage(error) : ""}
       <form action="/ics" method="POST">
         <div>
           <label for="title" class="c-title--label">Title</label>
@@ -77,7 +85,10 @@ const buildDateSection = (dates: Array<Date>, highPriorityDate: Date) => {
   `;
 };
 
-export const Edit = (props: { event: Event; appName: string }) => {
-  const children = content(props.event);
+export const Edit = (
+  props: { event: Event; appName: string },
+  error: string
+) => {
+  const children = content(props.event, error);
   return html` ${Layout({ title: props.appName, children })} `;
 };
