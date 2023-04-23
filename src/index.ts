@@ -6,11 +6,13 @@ import { Home } from "./pages/home";
 import { Edit } from "./pages/edit";
 import { generateIcs } from "./ics";
 import { escapeNewline, extractEventDates, extractEventName } from "./extract";
+import { isValidPeriod } from "./date";
 
 const app = new Hono();
 app.get("/static/*", serveStatic({ root: "./" }));
 
 const appName = "everything-ics";
+const cookieNameForError = `_${appName}_flash_error`;
 
 app.get("/", (context) => {
   const host = context.req.headers.get("host") || "";
@@ -21,6 +23,8 @@ app.get("/", (context) => {
 app.get("/ics", async (context) => {
   const host = context.req.headers.get("host");
   const url = context.req.query("url");
+  const error = context.req.cookie(cookieNameForError) || "";
+  context.cookie(cookieNameForError, "");
   if (!url) {
     throw new HTTPException(400, { message: "url parameter is required" });
   }
@@ -55,27 +59,48 @@ app.get("/ics", async (context) => {
     candidateDates: dates,
     url: escapedUrl,
   };
-
-  const htmlContent = Edit({ appName, event });
+  const htmlContent = Edit({ appName, event }, error);
   return context.html(htmlContent);
 });
 
 app.post("/ics", async (context) => {
-  const { title, date, url } = await context.req.parseBody();
-
+  const {
+    title,
+    from,
+    to = from,
+    url,
+    isMultipleDates = "0",
+  } = await context.req.parseBody();
   if (
     typeof title !== "string" ||
-    typeof date !== "string" ||
-    typeof url !== "string"
+    typeof from !== "string" ||
+    typeof to !== "string" ||
+    typeof url !== "string" ||
+    typeof isMultipleDates !== "string"
   ) {
     throw new HTTPException(400, { message: "bad request" });
   }
+  let ics: string;
 
-  const ics = generateIcs({
-    title: escapeNewline(title),
-    date,
-    url,
-  });
+  if (isMultipleDates === "0") {
+    ics = generateIcs({
+      title: escapeNewline(title),
+      from,
+      to,
+      url,
+    });
+  } else {
+    if (!isValidPeriod(from, to)) {
+      context.cookie(cookieNameForError, "'From' must be before 'To'.");
+      return context.redirect(`/ics?url=${url}`, 301);
+    }
+    ics = generateIcs({
+      title: escapeNewline(title),
+      from,
+      to,
+      url,
+    });
+  }
   return context.text(ics, 200, {
     "Content-Type": "text/calendar; charset=utf8",
   });

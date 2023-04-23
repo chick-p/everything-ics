@@ -17,5 +17,6 @@ export const Layout = (props: {
         <h1>🗓️ ${props.title}</h1>
         ${props.children}
       </main>
+      <script src="/static/js/form.js"></script>
     </body>
   </html>`;
