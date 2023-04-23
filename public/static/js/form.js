@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   window.addEventListener("DOMContentLoaded", (_) => {
     // toggle to display To date
     const multipleDateElement = document.querySelector("#multiple-dates");
@@ -18,7 +19,9 @@
           }
         } else {
           dateToElement.classList.add("hidden");
-          labelForDateFromElement.textContent = "Date";
+          if (labelForDateFromElement) {
+            labelForDateFromElement.textContent = "Date";
+          }
         }
       });
     }
