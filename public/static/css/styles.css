@@ -3,7 +3,9 @@
   --color-white: #f9fafb;
   --color-gray: #ccc;
   --color-blue: #3b82f6;
-  --color-teal: #0d9488;
+  --color-light-teal: #daeeed;
+  --color-teal: #6dbeb7;
+  --color-dark-teal: #0d9488;
 }
 
 html {
@@ -36,8 +38,6 @@ ol {
 }
 
 label {
-  display: block;
-  margin: 0 0 0.5rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
@@ -94,8 +94,74 @@ a {
   margin: 0.5rem 0 0;
 }
 
-.c-input {
+.c-title--label,
+.c-date-from--label,
+.c-date-to--label {
+  display: block;
+  margin: 0 0 0.5rem;
+}
+
+.spacer {
   margin: 0.75rem 0 0;
+}
+
+.c-date-from,
+.c-date-to {
+  margin: 0.75rem 0 0;
+}
+
+.c-date-to {
+  display: none;
+}
+
+.c-multiple-dates {
+  display: flex;
+  height: 1.5rem;
+  align-items: center;
+  column-gap: 0.75rem;
+}
+
+.c-multiple-dates--toggle {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 25px;
+  border-radius: 25px;
+  border: 2px solid var(--color-gray);
+  box-sizing: content-box;
+  cursor: pointer;
+  transition: border-color 0.4s;
+}
+
+.c-multiple-dates--toggle:has(:checked) {
+  border-color: var(--color-teal);
+}
+
+.c-multiple-dates--toggle::after {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-gray);
+  content: "";
+  transition: left 0.4s;
+}
+
+.c-multiple-dates--toggle:has(:checked)::after {
+  left: 25px;
+  background-color: var(--color-teal);
+}
+
+.c-multiple-dates--toggle input {
+  display: none;
+}
+
+.c-multiple-dates--label {
+  margin: 0;
+  line-height: 1.5rem;
 }
 
 .c-button {
@@ -105,12 +171,12 @@ a {
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
-  background-color: var(--color-teal);
+  background-color: var(--color-dark-teal);
   border: 0;
   border-radius: 0.5rem;
 }
 
 .c-button:hover {
-  background-color: var(--color-teal);
+  background-color: var(--color-dark-teal);
   filter: brightness(0.8);
 }
