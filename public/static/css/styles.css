@@ -46,40 +46,6 @@ label {
   font-weight: 500;
 }
 
-input[type="text"] {
-  display: block;
-  width: 100%;
-  padding: 0.625rem;
-  background-color: var(--color-white);
-  border: 2px solid var(--color-gray);
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-input[type="text"]:focus {
-  --tw-ring-color: var(--color-blue);
-
-  border-color: var(--color-blue);
-}
-
-select {
-  display: block;
-  width: 100%;
-  padding: 0.625rem;
-  background-color: var(--color-white);
-  border: 2px solid var(--color-gray);
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-select:focus {
-  --tw-ring-color: var(--color-blue);
-
-  border-color: var(--color-blue);
-}
-
 a {
   color: var(--color-blue);
   text-decoration: underline;
@@ -122,6 +88,40 @@ a {
 .c-date-from,
 .c-date-to {
   margin: 0.75rem 0 0;
+}
+
+.c-title--input {
+  display: block;
+  width: 100%;
+  padding: 0.625rem;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.c-title--input:focus {
+  --tw-ring-color: var(--color-blue);
+
+  border-color: var(--color-blue);
+}
+
+.c-date--select {
+  display: block;
+  width: 100%;
+  padding: 0.625rem;
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.c-date--select:focus {
+  --tw-ring-color: var(--color-blue);
+
+  border-color: var(--color-blue);
 }
 
 .c-date-to {
