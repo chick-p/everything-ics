@@ -23,18 +23,18 @@ const buildDateSection = (dates: Array<Date>, highPriorityDate: Date) => {
   return html`<div>
       <div class="c-date-from">
         <label for="date-from" class="c-date-from--label">Date</label>
-        <select name="from" id="date-from" class="spacer">
+        <select name="from" id="date-from" class="c-date--select spacer">
           ${dates.map((date) => dateList({ date, highPriorityDate }))}
         </select>
       </div>
-      <div class="c-date-to">
+      <div class="c-date-to hidden">
         <label for="date-to" class="c-date-to--label">To</label>
-        <select name="to" id="date-to" class="spacer">
+        <select name="to" id="date-to" class="c-date--select spacer">
           ${dates.map((date) => dateList({ date, highPriorityDate }))}
         </select>
       </div>
     </div>
-    <div style="display: ${hasMultiCandidates ? "block" : "none"}">
+    <div class="${hasMultiCandidates ? `` : `hidden`}">
       <div class="c-multiple-dates">
         <label class="c-multiple-dates--toggle">
           <input
@@ -72,7 +72,7 @@ const content = ({ title, candidateDates, url }: Event, error: string) => {
             type="text"
             value="${title}"
             placeholder="title"
-            class="spacer"
+            class="c-title--input spacer"
           />
         </div>
         <div>${buildDateSection(sortDates, highPriorityDate)}</div>

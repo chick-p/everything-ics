@@ -12,12 +12,12 @@
       multipleDateElement.addEventListener("change", (_e) => {
         const isMultipleDates = multipleDateElement.checked;
         if (isMultipleDates) {
-          dateToElement.style.display = "block";
+          dateToElement.classList.remove("hidden");
           if (labelForDateFromElement) {
             labelForDateFromElement.textContent = "From";
           }
         } else {
-          dateToElement.style.display = "none";
+          dateToElement.classList.add("hidden");
           labelForDateFromElement.textContent = "Date";
         }
       });
