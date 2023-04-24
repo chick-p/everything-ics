@@ -67,11 +67,6 @@ export const extractEventDates = (body: string) => {
   return Object.values(dateMap);
 };
 
-export const getFirstEventDate = (body: string) => {
-  const eventDates = extractEventDates(body);
-  return eventDates?.[0] || null;
-};
-
 export const sortDateByAsc = (dates: Array<Date>) =>
   dates.sort((a, b) => (a > b ? 1 : -1));
 
