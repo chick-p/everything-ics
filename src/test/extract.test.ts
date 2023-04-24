@@ -2,6 +2,7 @@ import {
   escapeNewline,
   extractEventDates,
   extractEventName,
+  hasYearString,
   sortDateByAsc,
 } from "../extract";
 
@@ -22,6 +23,28 @@ describe("extractEventName", () => {
     const body = "<h1>イベント名</h1>";
     const eventName = extractEventName(body);
     expect(eventName).toEqual("");
+  });
+});
+
+describe("hasYearString", () => {
+  it("should be true with full date string", () => {
+    const dateString = "2021年12月25日";
+    expect(hasYearString(dateString)).toEqual(true);
+  });
+
+  it("should be false with month and day string", () => {
+    const dateString = "12月25日";
+    expect(hasYearString(dateString)).toEqual(false);
+  });
+
+  it("should be true with shash month and day string", () => {
+    const dateString = "12/25";
+    expect(hasYearString(dateString)).toEqual(false);
+  });
+
+  it("should be true with shash date string", () => {
+    const dateString = "2021/12/25";
+    expect(hasYearString(dateString)).toEqual(true);
   });
 });
 
@@ -56,12 +79,14 @@ describe("extractEventDates", () => {
     const body = "今日は12月23日で明日は12月24日です";
     const dates = extractEventDates(body);
     expect(dates[0]).toEqual(new Date(currentYear, 11, 23));
+    expect(dates[1]).toEqual(new Date(currentYear, 11, 24));
   });
 
-  it("should return full date with date and full date strings", () => {
+  it("should return full date at first with date and full date strings", () => {
     const body = "今日は12月23日で明日は2022年12月24日です";
     const dates = extractEventDates(body);
     expect(dates[0]).toEqual(new Date(2022, 11, 24));
+    expect(dates[1]).toEqual(new Date(currentYear, 11, 23));
   });
 
   it("should return date with slashed date strings", () => {
@@ -82,16 +107,18 @@ describe("extractEventDates", () => {
     expect(dates.length).toEqual(0);
   });
 
-  it("should return full date with slashed date and full date strings", () => {
+  it("should return full date at first with slashed date and full date strings", () => {
     const body = "今日は2022/12/25で明日は2022年12月26日です";
     const dates = extractEventDates(body);
     expect(dates[0]).toEqual(new Date(2022, 11, 26));
+    expect(dates[1]).toEqual(new Date(2022, 11, 25));
   });
 
-  it("should return short date with slashed date and short date strings", () => {
+  it("should return short date at first with slashed date and short date strings", () => {
     const body = "今日は2022/12/25で明日は12月26日です";
     const dates = extractEventDates(body);
     expect(dates[0]).toEqual(new Date(currentYear, 11, 26));
+    expect(dates[1]).toEqual(new Date(2022, 11, 25));
   });
 
   it("should return in order japanase full date, short date and slashed date", () => {
@@ -107,6 +134,7 @@ describe("extractEventDates", () => {
     const body = "今日は12/25で、クリスマスは12月25日です";
     const dates = extractEventDates(body);
     expect(dates.length).toEqual(1);
+    expect(dates[0]).toEqual(new Date(currentYear, 11, 25));
   });
 });
 

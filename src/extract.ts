@@ -1,20 +1,22 @@
-export const extractRegex = (str: string, regex: RegExp): string => {
-  const matcher = str.match(regex);
-  if (matcher && matcher.length !== 0) {
-    return matcher[1];
+const extractRegex = (str: string, regex: RegExp): Array<string> => {
+  const matchesIterator = str.matchAll(regex);
+  let matchedStrings: Array<string> = [];
+  for (const match of matchesIterator) {
+    matchedStrings = [...matchedStrings, match[1]];
   }
-  return "";
+  return matchedStrings;
 };
 
 export const extractEventName = (body: string): string => {
-  return extractRegex(body, /<title>(.*?)<\/title>/);
+  const title = extractRegex(body, /<title>(.*?)<\/title>/g);
+  return title?.[0] || "";
 };
 
-const hasYearString = (dateString: string): boolean => {
+export const hasYearString = (dateString: string): boolean => {
   if (dateString.includes("年")) {
     return true;
   }
-  if (extractRegex(dateString, /(^\d{4})\//)) {
+  if (/(^\d{4})\//.test(dateString)) {
     return true;
   }
   return false;
@@ -47,23 +49,39 @@ export const formattedDate = (date: Date) => {
   return `${year}年${month}月${day}日`;
 };
 
-export const extractEventDates = (body: string) => {
+const extractEventDatesWithRegExp = (
+  body: string,
+  regex: RegExp
+): Record<string, Date> => {
   const dateMap: Record<string, Date> = {};
-  const fullDateString = extractRegex(body, /(\d+\s*年\s*\d+\s*月\s*\d+\s*日)/);
-  if (fullDateString) {
-    const date = getEventDate(fullDateString);
-    dateMap[formattedDate(date)] = date;
-  }
-  const dateString = extractRegex(body, /(\d+\s*月\s*\d+\s*日)/);
-  if (dateString) {
+  const dateStrings = extractRegex(body, regex);
+  dateStrings.forEach((dateString) => {
     const date = getEventDate(dateString);
     dateMap[formattedDate(date)] = date;
-  }
-  const slashedDateString = extractRegex(body, /(\d{4}\/\d{1,2}\/\d{1,2})/);
-  if (slashedDateString) {
-    const date = getEventDate(slashedDateString);
-    dateMap[formattedDate(date)] = date;
-  }
+  });
+  return dateMap;
+};
+
+export const extractEventDates = (body: string) => {
+  let dateMap: Record<string, Date> = {};
+
+  const fullDateRegex = /(\d{4}\s*年\s*\d{1,2}\s*月\s*\d{1,2}\s*日)/g;
+  dateMap = { ...dateMap, ...extractEventDatesWithRegExp(body, fullDateRegex) };
+  let replacedBody = body.replaceAll(fullDateRegex, "");
+
+  const shortDateRegex = /(\d{1,2}\s*月\s*\d{1,2}\s*日)/g;
+  dateMap = {
+    ...dateMap,
+    ...extractEventDatesWithRegExp(replacedBody, shortDateRegex),
+  };
+  replacedBody = replacedBody.replaceAll(shortDateRegex, "");
+
+  const slashedDateRegex = /(\d{4}\/\d{1,2}\/\d{1,2})/g;
+  dateMap = {
+    ...dateMap,
+    ...extractEventDatesWithRegExp(replacedBody, slashedDateRegex),
+  };
+
   return Object.values(dateMap);
 };
 
