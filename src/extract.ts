@@ -49,34 +49,39 @@ export const formattedDate = (date: Date) => {
   return `${year}年${month}月${day}日`;
 };
 
-export const extractEventDates = (body: string) => {
+const extractEventDatesWithRegExp = (
+  body: string,
+  regex: RegExp
+): Record<string, Date> => {
   const dateMap: Record<string, Date> = {};
-  let replacedBody = body;
-  const fullDateRegex = /(\d{4}\s*年\s*\d{1,2}\s*月\s*\d{1,2}\s*日)/g;
-  const fullDateStrings = extractRegex(replacedBody, fullDateRegex);
-  fullDateStrings.forEach((fullDateString) => {
-    const date = getEventDate(fullDateString);
-    dateMap[formattedDate(date)] = date;
-  });
-  replacedBody = replacedBody.replaceAll(fullDateRegex, "");
-  const dateStrings = extractRegex(
-    replacedBody,
-    /(\d{1,2}\s*月\s*\d{1,2}\s*日)/g
-  );
+  const dateStrings = extractRegex(body, regex);
   dateStrings.forEach((dateString) => {
     const date = getEventDate(dateString);
     dateMap[formattedDate(date)] = date;
   });
+  return dateMap;
+};
 
-  replacedBody = replacedBody.replaceAll(fullDateRegex, "");
-  const slashedDateStrings = extractRegex(
-    replacedBody,
-    /(\d{4}\/\d{1,2}\/\d{1,2})/g
-  );
-  slashedDateStrings.forEach((slashedDateString) => {
-    const date = getEventDate(slashedDateString);
-    dateMap[formattedDate(date)] = date;
-  });
+export const extractEventDates = (body: string) => {
+  let dateMap: Record<string, Date> = {};
+
+  const fullDateRegex = /(\d{4}\s*年\s*\d{1,2}\s*月\s*\d{1,2}\s*日)/g;
+  dateMap = { ...dateMap, ...extractEventDatesWithRegExp(body, fullDateRegex) };
+  let replacedBody = body.replaceAll(fullDateRegex, "");
+
+  const shortDateRegex = /(\d{1,2}\s*月\s*\d{1,2}\s*日)/g;
+  dateMap = {
+    ...dateMap,
+    ...extractEventDatesWithRegExp(replacedBody, shortDateRegex),
+  };
+  replacedBody = replacedBody.replaceAll(shortDateRegex, "");
+
+  const slashedDateRegex = /(\d{4}\/\d{1,2}\/\d{1,2})/g;
+  dateMap = {
+    ...dateMap,
+    ...extractEventDatesWithRegExp(replacedBody, slashedDateRegex),
+  };
+
   return Object.values(dateMap);
 };
 
