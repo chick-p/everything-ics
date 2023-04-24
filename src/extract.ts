@@ -12,7 +12,7 @@ export const extractEventName = (body: string): string => {
   return title?.[0] || "";
 };
 
-const hasYearString = (dateString: string): boolean => {
+export const hasYearString = (dateString: string): boolean => {
   if (dateString.includes("年")) {
     return true;
   }

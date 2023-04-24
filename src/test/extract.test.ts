@@ -2,6 +2,7 @@ import {
   escapeNewline,
   extractEventDates,
   extractEventName,
+  hasYearString,
   sortDateByAsc,
 } from "../extract";
 
@@ -22,6 +23,28 @@ describe("extractEventName", () => {
     const body = "<h1>イベント名</h1>";
     const eventName = extractEventName(body);
     expect(eventName).toEqual("");
+  });
+});
+
+describe("hasYearString", () => {
+  it("should be true with full date string", () => {
+    const dateString = "2021年12月25日";
+    expect(hasYearString(dateString)).toEqual(true);
+  });
+
+  it("should be false with month and day string", () => {
+    const dateString = "12月25日";
+    expect(hasYearString(dateString)).toEqual(false);
+  });
+
+  it("should be true with shash month and day string", () => {
+    const dateString = "12/25";
+    expect(hasYearString(dateString)).toEqual(false);
+  });
+
+  it("should be true with shash date string", () => {
+    const dateString = "2021/12/25";
+    expect(hasYearString(dateString)).toEqual(true);
   });
 });
 
