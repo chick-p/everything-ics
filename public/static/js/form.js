@@ -28,6 +28,28 @@
       }
     };
 
+    const showAllDates = () => {
+      const allDatesElement = document.querySelector("#all-dates");
+      const options = document.querySelectorAll(".c-date--option");
+      const today = new Date().setUTCHours(0, 0, 0, 0);
+      allDatesElement.addEventListener("change", () => {
+        const isAllDates = allDatesElement.checked;
+        if (isAllDates) {
+          options.forEach((option) => {
+            option.classList.remove("hidden");
+          });
+        } else {
+          options.forEach((option) => {
+            const date = new Date(option.value);
+            if (date < today) {
+              option.classList.add("hidden");
+            }
+          });
+        }
+      });
+    };
+
     toggleMultipleDate();
+    showAllDates();
   });
 }
