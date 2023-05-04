@@ -1,6 +1,7 @@
 import { html } from "hono/html";
 import { Layout } from "../components/Layout";
 import { formattedDate, sortDateByAsc } from "../extract";
+import { getBeginingOfDay } from "../date";
 
 type Event = {
   title: string;
@@ -8,29 +9,46 @@ type Event = {
   url: string;
 };
 
-const dateList = (props: { date: Date; highPriorityDate: Date }) => {
-  const { date, highPriorityDate } = props;
+const dateList = (props: {
+  date: Date;
+  highPriorityDate: Date;
+  isPast: boolean;
+}) => {
+  const { date, highPriorityDate, isPast } = props;
   return html` <option
     value="${date.toISOString()}"
     ${date === highPriorityDate ? "selected" : ""}
+    class="c-date--option ${isPast ? "hidden " : ""}"
   >
     ${formattedDate(date)}
   </option>`;
 };
 
+const getHighPriorityDate = (dates: Array<Date>): Date => {
+  const today = getBeginingOfDay(new Date());
+  const futureDates = dates.filter((date) => date >= today);
+  return futureDates[0] || dates[0];
+};
+
 const buildDateSection = (dates: Array<Date>, highPriorityDate: Date) => {
   const hasMultiCandidates = dates.length > 1;
+  const today = getBeginingOfDay(new Date());
+
   return html`<div>
       <div class="c-date-from">
         <label for="date-from" class="c-date-from--label">Date</label>
         <select name="from" id="date-from" class="c-date--select spacer">
-          ${dates.map((date) => dateList({ date, highPriorityDate }))}
+          ${dates.map((date) =>
+            dateList({ date, highPriorityDate, isPast: date < today })
+          )}
         </select>
       </div>
       <div class="c-date-to hidden">
         <label for="date-to" class="c-date-to--label">To</label>
         <select name="to" id="date-to" class="c-date--select spacer">
-          ${dates.map((date) => dateList({ date, highPriorityDate }))}
+          ${dates.map((date) =>
+            dateList({ date, highPriorityDate, isPast: date < today })
+          )}
         </select>
       </div>
     </div>
@@ -48,6 +66,12 @@ const buildDateSection = (dates: Array<Date>, highPriorityDate: Date) => {
           >Multiple date</label
         >
       </div>
+      <div class="c-all-dates">
+        <label class="c-all-dates--toggle">
+          <input type="checkbox" id="all-dates" value="1" />
+        </label>
+        <label for="all-dates" class="c-all-dates--label">Show all dates</label>
+      </div>
     </div>`;
 };
 const buildErrorMessage = (error: string) => html`<div
@@ -58,7 +82,7 @@ const buildErrorMessage = (error: string) => html`<div
 </div>`;
 
 const content = ({ title, candidateDates, url }: Event, error: string) => {
-  const highPriorityDate = candidateDates[0];
+  const highPriorityDate = getHighPriorityDate(candidateDates);
   const sortDates = sortDateByAsc(candidateDates);
   return html`
     <section>

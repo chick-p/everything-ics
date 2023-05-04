@@ -128,14 +128,16 @@ a {
   border-color: var(--color-blue);
 }
 
-.c-multiple-dates {
+.c-multiple-dates,
+.c-all-dates {
   display: flex;
   height: 1.5rem;
   align-items: center;
   column-gap: 0.75rem;
 }
 
-.c-multiple-dates--toggle {
+.c-multiple-dates--toggle,
+.c-all-dates--toggle {
   display: inline-block;
   position: relative;
   width: 50px;
@@ -147,11 +149,13 @@ a {
   transition: border-color 0.4s;
 }
 
-.c-multiple-dates--toggle:has(:checked) {
+.c-multiple-dates--toggle:has(:checked),
+.c-all-dates--toggle:has(:checked) {
   border-color: var(--color-teal);
 }
 
-.c-multiple-dates--toggle::after {
+.c-multiple-dates--toggle::after,
+.c-all-dates--toggle::after {
   position: absolute;
   top: 50%;
   left: 5px;
@@ -164,16 +168,19 @@ a {
   transition: left 0.4s;
 }
 
-.c-multiple-dates--toggle:has(:checked)::after {
+.c-multiple-dates--toggle:has(:checked)::after,
+.c-all-dates--toggle:has(:checked)::after {
   left: 25px;
   background-color: var(--color-teal);
 }
 
-.c-multiple-dates--toggle input {
+.c-multiple-dates--toggle input,
+.c-all-dates--toggle input {
   display: none;
 }
 
-.c-multiple-dates--label {
+.c-multiple-dates--label,
+.c-all-dates--label {
   margin: 0;
   line-height: 1.5rem;
 }
