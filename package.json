@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "wrangler publish --minify",
+    "deploy": "wrangler deploy --minify",
     "test": "jest",
     "lint": "run-p lint:*",
     "lint:prettier": "prettier --check .",
