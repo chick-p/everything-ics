@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "wrangler publish --minify",
+    "deploy": "wrangler deploy --minify",
     "test": "jest",
     "lint": "run-p lint:*",
     "lint:prettier": "prettier --check .",
@@ -33,6 +33,6 @@
     "prettier": "^2.8.8",
     "stylelint": "^15.6.2",
     "stylelint-config-standard": "^33.0.0",
-    "wrangler": "^2.20.0"
+    "wrangler": "^3.0.0"
   }
 }
