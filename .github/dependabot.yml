@@ -14,3 +14,14 @@ updates:
       interval: "daily"
     assignees:
       - "chick-p"
+    groups:
+      eslint:
+        patterns:
+          - "eslint"
+          - "prettier"
+          - "eslint-config-*"
+          - "eslint-plugin-*"
+      stylelint:
+        patterns:
+          - "stylelint"
+          - "stylelint-config-standard"
