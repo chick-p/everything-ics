@@ -7,7 +7,7 @@
       const multipleDateElement = document.querySelector("#multiple-dates");
       const dateToElement = document.querySelector(".c-date-to");
       const labelForDateFromElement = document.querySelector(
-        ".c-date-from--label"
+        ".c-date-from--label",
       );
       if (multipleDateElement && dateToElement) {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
