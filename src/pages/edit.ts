@@ -39,7 +39,7 @@ const buildDateSection = (dates: Array<Date>, highPriorityDate: Date) => {
         <label for="date-from" class="c-date-from--label">Date</label>
         <select name="from" id="date-from" class="c-date--select spacer">
           ${dates.map((date) =>
-            dateList({ date, highPriorityDate, isPast: date < today })
+            dateList({ date, highPriorityDate, isPast: date < today }),
           )}
         </select>
       </div>
@@ -47,7 +47,7 @@ const buildDateSection = (dates: Array<Date>, highPriorityDate: Date) => {
         <label for="date-to" class="c-date-to--label">To</label>
         <select name="to" id="date-to" class="c-date--select spacer">
           ${dates.map((date) =>
-            dateList({ date, highPriorityDate, isPast: date < today })
+            dateList({ date, highPriorityDate, isPast: date < today }),
           )}
         </select>
       </div>
@@ -74,12 +74,10 @@ const buildDateSection = (dates: Array<Date>, highPriorityDate: Date) => {
       </div>
     </div>`;
 };
-const buildErrorMessage = (error: string) => html`<div
-  class="c-message c-message--error"
-  role="alert"
->
-  <span>${error}</span>
-</div>`;
+const buildErrorMessage = (error: string) =>
+  html`<div class="c-message c-message--error" role="alert">
+    <span>${error}</span>
+  </div>`;
 
 const content = ({ title, candidateDates, url }: Event, error: string) => {
   const highPriorityDate = getHighPriorityDate(candidateDates);
@@ -111,7 +109,7 @@ const content = ({ title, candidateDates, url }: Event, error: string) => {
 
 export const Edit = (
   props: { event: Event; appName: string },
-  error: string
+  error: string,
 ) => {
   const children = content(props.event, error);
   return html` ${Layout({ title: props.appName, children })} `;

@@ -56,7 +56,7 @@ describe("GET /ics", () => {
 
   it("should be 404 when url has no date", async () => {
     const res = await app.request(
-      `${appServer}/ics?url=${exampleServer}/nodate`
+      `${appServer}/ics?url=${exampleServer}/nodate`,
     );
     expect(res.status).toBe(404);
   });

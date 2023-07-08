@@ -37,7 +37,7 @@ const getEventDate = (dateString: string): Date => {
   const date = new Date(
     Number(yearString),
     Number(monthString) - 1,
-    Number(dayString)
+    Number(dayString),
   );
   return date;
 };
@@ -51,7 +51,7 @@ export const formattedDate = (date: Date) => {
 
 const extractEventDatesWithRegExp = (
   body: string,
-  regex: RegExp
+  regex: RegExp,
 ): Record<string, Date> => {
   const dateMap: Record<string, Date> = {};
   const dateStrings = extractRegex(body, regex);
