@@ -29,6 +29,8 @@ export const generateIcs = ({
   const currentDate = new Date();
   const eventDateFrom = new Date(from);
   const eventDateTo = new Date(to);
+  // all day event ends at the beginning of the next day
+  eventDateTo.setDate(eventDateTo.getDate() + 1);
   return `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//everything-ics//everything-ics//EN
