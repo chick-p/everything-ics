@@ -45,7 +45,8 @@
       }
     };
 
-    const replaceAllDates = (selections) => {
+    const replaceAllDates = () => {
+      const selections = document.querySelectorAll(".c-date--select");
       const allDateSelection = document.querySelector("#all-datelist");
       for (let selection of selections) {
         selection.innerHTML = allDateSelection.innerHTML;
@@ -54,10 +55,9 @@
 
     const registerTogglePastDates = () => {
       const hadPastElement = document.querySelector("#all-dates");
-      const dateSelections = document.querySelectorAll(".c-date--select");
       hadPastElement.addEventListener("change", () => {
         if (hadPastElement.checked) {
-          replaceAllDates(dateSelections);
+          replaceAllDates();
         } else {
           hideUnnecessaryDates();
         }
