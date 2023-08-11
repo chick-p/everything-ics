@@ -32,7 +32,7 @@
       return span;
     };
 
-    const hideUnnecessaryDates = () => {
+    const hidePastDates = () => {
       const selections = document.querySelectorAll(".c-date--select");
       for (let selection of selections) {
         const options = selection.querySelectorAll(".c-date--option");
@@ -59,12 +59,12 @@
         if (hadPastElement.checked) {
           replaceAllDates();
         } else {
-          hideUnnecessaryDates();
+          hidePastDates();
         }
       });
     };
 
-    hideUnnecessaryDates();
+    hidePastDates();
     registerToggleMultipleDate();
     registerTogglePastDates();
   });
