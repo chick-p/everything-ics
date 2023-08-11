@@ -25,15 +25,11 @@
     };
 
     // display: none not working for options in Safari
-    const wrapSpan = (option) => {
-      const date = new Date(option.value);
-      if (date < startOfToday) {
-        const span = document.createElement("span");
-        span.classList.add("hidden");
-        span.appendChild(option);
-        return span;
-      }
-      return option;
+    const hideOption = (option) => {
+      const span = document.createElement("span");
+      span.classList.add("hidden");
+      span.appendChild(option);
+      return span;
     };
 
     const hideUnnecessaryDates = () => {
@@ -41,7 +37,10 @@
       for (let selection of selections) {
         const options = selection.querySelectorAll(".c-date--option");
         for (let option of options) {
-          option = wrapSpan(option);
+          const date = new Date(option.value);
+          if (date < startOfToday) {
+            hideOption(option);
+          }
         }
       }
     };
