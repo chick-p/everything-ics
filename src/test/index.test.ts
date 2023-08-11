@@ -89,6 +89,7 @@ describe("POST /ics", () => {
     expect(body).toContain("VCALENDAR");
     expect(body).toContain(`SUMMARY:${title}`);
     expect(body).toContain(`DTSTART:20230407`);
+    expect(body).toContain(`DTEND:20230416`);
     expect(body).toContain(`URL:${url}`);
   });
 
