@@ -42,7 +42,8 @@
       return option;
     };
 
-    const hideUnnecessaryDates = (selections) => {
+    const hideUnnecessaryDates = () => {
+      const selections = document.querySelectorAll(".c-date--select");
       for (let selection of selections) {
         const options = selection.querySelectorAll(".c-date--option");
         for (let option of options) {
@@ -65,17 +66,12 @@
         if (hadPastElement.checked) {
           replaceAllDates(dateSelections);
         } else {
-          hideUnnecessaryDates(dateSelections);
+          hideUnnecessaryDates();
         }
       });
     };
 
-    const initialize = () => {
-      const dateSelections = document.querySelectorAll(".c-date--select");
-      hideUnnecessaryDates(dateSelections);
-    };
-
-    initialize();
+    hideUnnecessaryDates();
     registerToggleMultipleDate();
     registerTogglePastDates();
   });
