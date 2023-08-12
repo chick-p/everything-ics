@@ -89,6 +89,7 @@ describe("POST /ics", () => {
     expect(body).toContain("VCALENDAR");
     expect(body).toContain(`SUMMARY:${title}`);
     expect(body).toContain(`DTSTART:20230407`);
+    expect(body).toContain(`DTEND:20230417`);
     expect(body).toContain(`URL:${url}`);
   });
 
@@ -105,7 +106,7 @@ describe("POST /ics", () => {
     expect(res.status).toBe(200);
     const body = await res.text();
     expect(body).toContain(`DTSTART:20230407`);
-    expect(body).toContain(`DTEND:20230407`);
+    expect(body).toContain(`DTEND:20230408`);
   });
 
   it("should be 301 when from and to are same date though multiple date", async () => {
