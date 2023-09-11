@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { getCookie, setCookie } from "hono/cookie";
 import { serveStatic } from "hono/cloudflare-workers";
 import { HTTPException } from "hono/http-exception";
 
@@ -23,8 +24,8 @@ app.get("/", (context) => {
 app.get("/ics", async (context) => {
   const host = context.req.headers.get("host");
   const url = context.req.query("url");
-  const error = context.req.cookie(cookieNameForError) || "";
-  context.cookie(cookieNameForError, "");
+  const error = getCookie(context, cookieNameForError) || "";
+  setCookie(context, cookieNameForError, "");
   if (!url) {
     throw new HTTPException(400, { message: "url parameter is required" });
   }
@@ -91,7 +92,7 @@ app.post("/ics", async (context) => {
     });
   } else {
     if (!isValidPeriod(from, to)) {
-      context.cookie(cookieNameForError, "'From' must be before 'To'.");
+      setCookie(context, cookieNameForError, "'From' must be before 'To'.");
       return context.redirect(`/ics?url=${url}`, 301);
     }
     ics = generateIcs({
