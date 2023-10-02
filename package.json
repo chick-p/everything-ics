@@ -16,7 +16,7 @@
     "fix:stylelint": "npm run lint:stylelint -- --fix"
   },
   "dependencies": {
-    "hono": "^3.7.2"
+    "hono": "^3.7.3"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20231002.0",
