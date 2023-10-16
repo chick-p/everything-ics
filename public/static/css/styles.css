@@ -199,5 +199,5 @@ a {
 
 .c-button:hover {
   background-color: var(--color-dark-teal);
-  filter: brightness(0.8);
+  filter: brightness(1.25);
 }
