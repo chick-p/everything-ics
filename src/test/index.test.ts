@@ -54,11 +54,13 @@ describe("GET /ics", () => {
     expect(res.status).toBe(404);
   });
 
-  it("should be 404 when url has no date", async () => {
+  it("should be 400 when url has no date", async () => {
     const res = await app.request(
       `${appServer}/ics?url=${exampleServer}/nodate`,
     );
-    expect(res.status).toBe(404);
+    expect(res.status).toBe(400);
+    const body = await res.text();
+    expect(body).toContain("date not found");
   });
 
   it("should be 200 when url has date", async () => {
