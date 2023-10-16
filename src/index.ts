@@ -52,7 +52,7 @@ app.get("/ics", async (context) => {
   const title = extractEventName(body);
   const dates = extractEventDates(body);
   if (!dates || dates.length === 0) {
-    return context.notFound();
+    throw new HTTPException(400, { message: "date not found" });
   }
   const event = {
     title,
