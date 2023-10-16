@@ -1,5 +1,8 @@
 # everything-ics
 
+You can easily register the event to your calendar from a news site page.  
+[イベント情報のページからカレンダーに予定を登録する「everything-ics」を作った](https://blog.chick-p.work/blog/everything-ics)（Japanese）
+
 ## Requirements
 
 - Cloudflare Workers
