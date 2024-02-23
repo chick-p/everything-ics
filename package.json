@@ -19,7 +19,7 @@
     "hono": "^3.12.12"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240208.0",
+    "@cloudflare/workers-types": "^4.20240222.0",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
