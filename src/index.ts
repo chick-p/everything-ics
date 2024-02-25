@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { getCookie, setCookie } from "hono/cookie";
 import { serveStatic } from "hono/cloudflare-workers";
 import { HTTPException } from "hono/http-exception";
+import manifest from "__STATIC_CONTENT_MANIFEST";
 
 import { Home } from "./pages/home";
 import { Edit } from "./pages/edit";
@@ -10,19 +11,19 @@ import { escapeNewline, extractEventDates, extractEventName } from "./extract";
 import { isValidPeriod } from "./date";
 
 const app = new Hono();
-app.get("/static/*", serveStatic({ root: "./" }));
+app.get("/static/*", serveStatic({ root: "./", manifest }));
 
 const appName = "everything-ics";
 const cookieNameForError = `_${appName}_flash_error`;
 
 app.get("/", (context) => {
-  const host = context.req.headers.get("host") || "";
+  const host = context.req.raw.headers.get("host") || "";
   const htmlContent = Home({ appName, host });
   return context.html(htmlContent);
 });
 
 app.get("/ics", async (context) => {
-  const host = context.req.headers.get("host");
+  const host = context.req.raw.headers.get("host");
   const url = context.req.query("url");
   const error = getCookie(context, cookieNameForError) || "";
   setCookie(context, cookieNameForError, "");
