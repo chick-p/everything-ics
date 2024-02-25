@@ -9,10 +9,10 @@
     "types": [
       "@cloudflare/workers-types",
       "@types/jest",
-      "jest-environment-miniflare/globals",
+      "jest-environment-miniflare/globals"
     ],
     "jsx": "react-jsx",
     "jsxFragmentFactory": "Fragment",
-    "jsxImportSource": "hono/jsx",
-  },
+    "jsxImportSource": "hono/jsx"
+  }
 }
