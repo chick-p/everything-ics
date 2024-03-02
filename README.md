@@ -11,8 +11,8 @@ You can easily register the event to your calendar from a news site page.
 ## Deploy
 
 ```shell
-npm install
-npm run deploy
+pnpm install
+pnpm run deploy
 
 > everything-ics@0.0.0 deploy
 > wrangler publish
