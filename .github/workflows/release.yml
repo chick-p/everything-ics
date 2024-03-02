@@ -8,6 +8,9 @@ on:
         required: true
         type: string
 
+permissions:
+  contents: write
+
 jobs:
   release:
     uses: chick-p/github-actions-shared-workflow/.github/workflows/release-npm-package.yml@main
