@@ -16,7 +16,7 @@
     "fix:stylelint": "pnpm run lint:stylelint -- --fix"
   },
   "dependencies": {
-    "hono": "^4.1.0"
+    "hono": "^4.1.3"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240314.0",
