@@ -33,6 +33,6 @@
     "prettier": "^3.2.5",
     "stylelint": "^16.2.1",
     "stylelint-config-standard": "^36.0.0",
-    "wrangler": "^3.34.2"
+    "wrangler": "^3.37.0"
   }
 }
