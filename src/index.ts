@@ -38,7 +38,7 @@ app.get("/ics", async (context) => {
   try {
     const { hostname } = new URL(escapedUrl);
     passedHostName = hostname;
-  } catch (e) {
+  } catch {
     throw new HTTPException(500, { message: "bad url" });
   }
   if (host === passedHostName) {
