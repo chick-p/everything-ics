@@ -31,7 +31,7 @@
     "prettier": "^3.3.3",
     "stylelint": "^16.8.1",
     "stylelint-config-standard": "^36.0.1",
-    "typescript-eslint": "8.0.0-alpha.54",
+    "typescript-eslint": "8.0.0",
     "wrangler": "^3.68.0"
   }
 }
