@@ -23,7 +23,7 @@ updates:
           - "prettier"
           - "eslint-config-*"
           - "eslint-plugin-*"
-          - "@typescript-eslint/*"
+          - "typescript-eslint"
       stylelint:
         patterns:
           - "stylelint"
