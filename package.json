@@ -19,7 +19,7 @@
     "hono": "^4.5.11"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240821.1",
+    "@cloudflare/workers-types": "^4.20240903.0",
     "@types/jest": "^29.5.12",
     "esbuild": "^0.23.1",
     "esbuild-jest": "^0.5.0",
