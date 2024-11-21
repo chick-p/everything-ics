@@ -31,12 +31,12 @@ app.get("/ics", async (context) => {
     throw new HTTPException(400, { message: "url parameter is required" });
   }
 
-  const escapedUrl = escapeNewline(url);
+  const encodedUrl = encodeURI(escapeNewline(url));
 
   // prevent redirect
   let passedHostName;
   try {
-    const { hostname } = new URL(escapedUrl);
+    const { hostname } = new URL(encodedUrl);
     passedHostName = hostname;
   } catch {
     throw new HTTPException(500, { message: "bad url" });
@@ -45,7 +45,7 @@ app.get("/ics", async (context) => {
     throw new HTTPException(400, { message: "forbidden url" });
   }
 
-  const response = await fetch(escapedUrl);
+  const response = await fetch(encodedUrl);
   if (!response.ok) {
     return context.notFound();
   }
@@ -59,7 +59,7 @@ app.get("/ics", async (context) => {
   const event = {
     title,
     candidateDates: dates,
-    url: escapedUrl,
+    url: encodedUrl,
   };
   const htmlContent = Edit({ appName, event }, error);
   return context.html(htmlContent);
