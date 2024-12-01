@@ -100,8 +100,8 @@
 }
 
 :where(
-    .visually-hidden:not(:focus, :active, :focus-within, .not-visually-hidden)
-  ) {
+  .visually-hidden:not(:focus, :active, :focus-within, .not-visually-hidden)
+) {
   clip-path: inset(50%) !important;
   height: 1px !important;
   width: 1px !important;
