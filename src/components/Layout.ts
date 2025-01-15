@@ -9,6 +9,7 @@ export const Layout = (props: { title: string; children: string }) =>
         <title>${props.title}</title>
         <link rel="stylesheet" href="/static/css/reset.css" />
         <link rel="stylesheet" href="/static/css/styles.css" />
+        <link rel="icon" href="/static/favicon.svg" />
       </head>
       <body>
         <main class="c-main">
