@@ -103,10 +103,10 @@ const content = ({ title, candidateDates, url }: Event, error: string) => {
   `;
 };
 
-export const Edit = (
+export const Edit = async (
   props: { event: Event; appName: string },
   error: string,
 ) => {
-  const children = content(props.event, error);
+  const children = await content(props.event, error);
   return html` ${Layout({ title: props.appName, children })} `;
 };

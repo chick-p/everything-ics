@@ -33,7 +33,7 @@ const content = (props: { host: string; appName: string }) => html`
   </section>
 `;
 
-export const Home = (props: { appName: string; host: string }) => {
-  const children = content(props);
+export const Home = async (props: { appName: string; host: string }) => {
+  const children = await content(props);
   return html` ${Layout({ title: props.appName, children })} `;
 };
