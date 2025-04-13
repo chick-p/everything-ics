@@ -103,6 +103,7 @@ app.get("/ics/download", async (context) => {
   }
   return context.text(ics, 200, {
     "Content-Type": "text/calendar; charset=utf8",
+    "Content-Disposition": 'attachment; filename="calendar.ics"',
   });
 });
 
