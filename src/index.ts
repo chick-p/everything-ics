@@ -65,14 +65,12 @@ app.get("/ics", async (context) => {
   return context.html(htmlContent);
 });
 
-app.post("/ics", async (context) => {
-  const {
-    title,
-    from,
-    to = from,
-    url,
-    isMultipleDates = "0",
-  } = await context.req.parseBody();
+app.get("/ics/download", async (context) => {
+  const title = context.req.query("title");
+  const from = context.req.query("from");
+  const to = context.req.query("to") || from;
+  const url = context.req.query("url");
+  const isMultipleDates = context.req.query("isMultipleDates") || "0";
   if (
     typeof title !== "string" ||
     typeof from !== "string" ||

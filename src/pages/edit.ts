@@ -81,7 +81,7 @@ const content = ({ title, candidateDates, url }: Event, error: string) => {
   return html`
     <section>
       ${error ? buildErrorMessage(error) : ""}
-      <form action="/ics" method="POST">
+      <form action="/ics/download" method="GET">
         <div>
           <label for="title" class="c-title--label">Title</label>
           <input
