@@ -71,19 +71,18 @@ describe("GET /ics", () => {
   });
 });
 
-describe("POST /ics", () => {
+describe("GET /ics/download", () => {
   it("should be generate ics when pass Title, From and To", async () => {
     const title = "Birthday";
     const url = `${exampleServer}/date`;
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("from", "2023-04-07T12:00:00.000");
-    formData.append("to", "2023-04-16T12:00:00.000");
-    formData.append("isMultipleDates", "1");
-    formData.append("url", url);
-    const req = new Request(`${appServer}/ics`, {
-      method: "POST",
-      body: formData,
+    const urlParams = new URLSearchParams();
+    urlParams.append("title", title);
+    urlParams.append("from", "2023-04-07T12:00:00.000");
+    urlParams.append("to", "2023-04-16T12:00:00.000");
+    urlParams.append("isMultipleDates", "1");
+    urlParams.append("url", url);
+    const req = new Request(`${appServer}/ics/download?${urlParams}`, {
+      method: "GET",
     });
     const res = await app.request(req);
     expect(res.status).toBe(200);
@@ -96,13 +95,12 @@ describe("POST /ics", () => {
   });
 
   it("should be generate ics when it is not multiple date", async () => {
-    const formData = new FormData();
-    formData.append("title", "Birthday");
-    formData.append("from", "2023-04-07T12:00:00.000");
-    formData.append("url", `${exampleServer}/date`);
-    const req = new Request(`${appServer}/ics`, {
-      method: "POST",
-      body: formData,
+    const urlParams = new URLSearchParams();
+    urlParams.append("title", "Birthday");
+    urlParams.append("from", "2023-04-07T12:00:00.000");
+    urlParams.append("url", `${exampleServer}/date`);
+    const req = new Request(`${appServer}/ics/download?${urlParams}`, {
+      method: "GET",
     });
     const res = await app.request(req);
     expect(res.status).toBe(200);
@@ -112,30 +110,28 @@ describe("POST /ics", () => {
   });
 
   it("should be 301 when from and to are same date though multiple date", async () => {
-    const formData = new FormData();
-    formData.append("title", "Birthday");
-    formData.append("from", "2023-04-07T12:00:00.000");
-    formData.append("to", "2023-04-07T12:00:00.000");
-    formData.append("url", `${exampleServer}/date`);
-    formData.append("isMultipleDates", "1");
-    const req = new Request(`${appServer}/ics`, {
-      method: "POST",
-      body: formData,
+    const urlParams = new URLSearchParams();
+    urlParams.append("title", "Birthday");
+    urlParams.append("from", "2023-04-07T12:00:00.000");
+    urlParams.append("to", "2023-04-07T12:00:00.000");
+    urlParams.append("url", `${exampleServer}/date`);
+    urlParams.append("isMultipleDates", "1");
+    const req = new Request(`${appServer}/ics/download?${urlParams}`, {
+      method: "GET",
     });
     const res = await app.request(req);
     expect(res.status).toBe(301);
   });
 
   it("should be 301 when From is after To", async () => {
-    const formData = new FormData();
-    formData.append("title", "Birthday");
-    formData.append("from", "2023-04-10T12:00:00.000");
-    formData.append("to", "2023-04-08T12:00:00.000");
-    formData.append("isMultipleDates", "1");
-    formData.append("url", `${exampleServer}/date`);
-    const req = new Request(`${appServer}/ics`, {
-      method: "POST",
-      body: formData,
+    const urlParams = new URLSearchParams();
+    urlParams.append("title", "Birthday");
+    urlParams.append("from", "2023-04-10T12:00:00.000");
+    urlParams.append("to", "2023-04-08T12:00:00.000");
+    urlParams.append("isMultipleDates", "1");
+    urlParams.append("url", `${exampleServer}/date`);
+    const req = new Request(`${appServer}/ics/download?${urlParams}`, {
+      method: "GET",
     });
     const res = await app.request(req);
     expect(res.status).toBe(301);
