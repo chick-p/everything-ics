@@ -20,9 +20,9 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250620.0",
+    "@swc/jest": "^0.2.38",
     "@types/jest": "^30.0.0",
     "esbuild": "^0.25.4",
-    "esbuild-jest": "^0.5.0",
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.5",
     "jest": "^30.0.2",
