@@ -2,7 +2,7 @@
 module.exports = {
   testMatch: ["**/test/**/*.test.ts"],
   transform: {
-    "^.+\\.(ts|tsx)$": "esbuild-jest",
+    "^.+\\.(ts|tsx)$": "@swc/jest",
   },
   testEnvironment: "miniflare",
   moduleNameMapper: {
