@@ -1,3 +1,6 @@
+import { fetchMock } from "cloudflare:test";
+import { describe, it, expect, beforeAll } from "vitest";
+
 import app from "../index";
 
 const appServer = "http://localhost";
@@ -15,7 +18,7 @@ describe("GET /", () => {
 describe("GET /ics", () => {
   beforeAll(() => {
     // mock cloudflare workers fetch
-    const fetchMock = getMiniflareFetchMock();
+    fetchMock.activate();
     fetchMock.disableNetConnect();
     const origin = fetchMock.get(exampleServer);
     origin.intercept({ method: "GET", path: "/404" }).reply(404, "not found");
