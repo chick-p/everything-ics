@@ -1,18 +1,15 @@
 name: Run release
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Version"
-        required: true
-        type: string
+  push:
+    branches:
+      - main
+    paths:
+      - "package.json"
 
 permissions:
   contents: write
 
 jobs:
   release:
-    uses: chick-p/github-actions-shared-workflow/.github/workflows/release-npm-package.yml@main
-    with:
-      version: ${{ inputs.version }}
+    uses: chick-p/github-actions-shared-workflow/.github/workflows/release-npm-package-auto.yml@main
