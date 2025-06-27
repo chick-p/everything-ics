@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       hono:
-        specifier: ^4.8.1
-        version: 4.8.1
+        specifier: ^4.8.3
+        version: 4.8.3
     devDependencies:
       '@cloudflare/vitest-pool-workers':
         specifier: ^0.8.43
@@ -1381,8 +1381,8 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
-  hono@4.8.1:
-    resolution: {integrity: sha512-ErA2ifywnSmcnB5XDuFqGDfXJ9xuAJR2C/8cZAk6vDaOCzofB8eNlha/wZWIiamREzWk94S9Z7wHsnKQHn7Niw==}
+  hono@4.8.3:
+    resolution: {integrity: sha512-jYZ6ZtfWjzBdh8H/0CIFfCBHaFL75k+KMzaM177hrWWm2TWL39YMYaJgB74uK/niRc866NMlH9B8uCvIo284WQ==}
     engines: {node: '>=16.9.0'}
 
   hookified@1.9.1:
@@ -3562,7 +3562,7 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
-  hono@4.8.1: {}
+  hono@4.8.3: {}
 
   hookified@1.9.1: {}
 
