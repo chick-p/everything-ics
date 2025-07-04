@@ -46,8 +46,8 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4
       wrangler:
-        specifier: ^4.22.0
-        version: 4.22.0(@cloudflare/workers-types@4.20250627.0)
+        specifier: ^4.23.0
+        version: 4.23.0(@cloudflare/workers-types@4.20250627.0)
 
 packages:
 
