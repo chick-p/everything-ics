@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.8.53",
-    "@cloudflare/workers-types": "^4.20250711.0",
+    "@cloudflare/workers-types": "^4.20250718.0",
     "esbuild": "^0.25.6",
     "eslint": "^9.31.0",
     "eslint-config-prettier": "^10.1.8",
