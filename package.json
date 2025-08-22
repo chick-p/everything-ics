@@ -22,13 +22,13 @@
     "@cloudflare/vitest-pool-workers": "^0.8.64",
     "@cloudflare/workers-types": "^4.20250807.0",
     "esbuild": "^0.25.8",
-    "eslint": "^9.33.0",
+    "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.6.2",
     "stylelint": "^16.23.1",
     "stylelint-config-standard": "^39.0.0",
-    "typescript-eslint": "8.39.1",
+    "typescript-eslint": "8.40.0",
     "vitest": "^3.2.4",
     "wrangler": "^4.29.0"
   }
