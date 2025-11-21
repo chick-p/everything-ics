@@ -3,7 +3,20 @@ import { Layout } from "../components/Layout";
 
 const content = (props: { host: string; appName: string }) => html`
   <section>
-    <h2>How to setup shortcut</h2>
+    <h2>How to use?</h2>
+    <ul>
+      <li><a href="/direct">Direct Input</a></li>
+      <li>
+        <a
+          href="https://github.com/chick-p/chrome-extension-everything-ics"
+          target="_blank"
+          >Chrome Extentions</a
+        >
+      </li>
+      <li><a href="#shortcut">iOS Shortcut</a></li>
+    </ul>
+    <h2 id="shortcut">iOS Shortcut</h2>
+    <h3>Setup</h3>
     <ol>
       <li>
         Copy your Cloudflare Workers URL:
@@ -20,7 +33,7 @@ const content = (props: { host: string; appName: string }) => html`
       </li>
       <li>Set your Cloudflare Workers URL.</li>
     </ol>
-    <h2>How to use</h2>
+    <h3>Usage</h3>
     <ol>
       <li>Open an event page on your browser.</li>
       <li>
