@@ -6,6 +6,7 @@ import manifest from "__STATIC_CONTENT_MANIFEST";
 
 import { Home } from "./pages/home";
 import { Edit } from "./pages/edit";
+import { Direct } from "./pages/direct";
 import { generateIcs } from "./ics";
 import { escapeNewline, extractEventDates, extractEventName } from "./extract";
 import { isValidPeriod } from "./date";
@@ -19,6 +20,11 @@ const cookieNameForError = `_${appName}_flash_error`;
 app.get("/", (context) => {
   const host = context.req.raw.headers.get("host") || "";
   const htmlContent = Home({ appName, host });
+  return context.html(htmlContent);
+});
+
+app.get("/direct", (context) => {
+  const htmlContent = Direct({ appName });
   return context.html(htmlContent);
 });
 
