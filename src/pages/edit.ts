@@ -12,7 +12,7 @@ type Event = {
 const dateList = (props: { date: Date; highPriorityDate: Date }) => {
   const { date, highPriorityDate } = props;
   return html` <option
-    value="${date.toISOString()}"
+    value=${date.toISOString()}
     ${date === highPriorityDate ? "selected" : ""}
     class="c-date--option"
   >
@@ -48,7 +48,7 @@ const buildDateSection = (dates: Array<Date>, highPriorityDate: Date) => {
         </select>
       </div>
     </div>
-    <div class="${hasMultiCandidates ? `` : `hidden`}">
+    <div class=${hasMultiCandidates ? `` : `hidden`}>
       <div class="c-multiple-dates">
         <label class="c-multiple-dates--toggle">
           <input
@@ -88,13 +88,13 @@ const content = ({ title, candidateDates, url }: Event, error: string) => {
             name="title"
             id="title"
             type="text"
-            value="${title}"
+            value=${title}
             placeholder="title"
             class="c-title--input spacer"
           />
         </div>
         <div>${buildDateSection(sortDates, highPriorityDate)}</div>
-        <input name="url" type="hidden" value="${url}" />
+        <input name="url" type="hidden" value=${url} />
         <div>
           <button type="submit" class="c-button">Generate ics</button>
         </div>
