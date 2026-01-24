@@ -12,6 +12,12 @@ updates:
     schedule:
       interval: "weekly"
       day: "friday"
+    ignore:
+      # vitest-pool-workers does not support vitest v4 yet
+      # https://github.com/cloudflare/workers-sdk/issues/11064
+      - dependency-name: "vitest"
+        versions:
+          - ">=4.0.0"
     groups:
       eslint:
         patterns:
