@@ -81,6 +81,7 @@ export const extractEventDates = (body: string) => {
     ...dateMap,
     ...extractEventDatesWithRegExp(replacedBody, slashedDateRegex),
   };
+  console.log("Extracted dates:", Object.values(dateMap));
 
   return Object.values(dateMap);
 };
@@ -89,3 +90,12 @@ export const sortDateByAsc = (dates: Array<Date>) =>
   dates.sort((a, b) => (a > b ? 1 : -1));
 
 export const escapeNewline = (str: string) => str.replace(/\r|\n/g, "");
+
+export const normalizeWhitespace = (str: string): string => {
+  return str
+    .replace(
+      /[\u00A0\u1680\u180e\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]/g,
+      "",
+    )
+    .replace(/\s+/g, "");
+};
