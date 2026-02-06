@@ -8,7 +8,12 @@ import { Home } from "./pages/home";
 import { Edit } from "./pages/edit";
 import { Direct } from "./pages/direct";
 import { generateIcs } from "./ics";
-import { escapeNewline, extractEventDates, extractEventName } from "./extract";
+import {
+  escapeNewline,
+  extractEventDates,
+  extractEventName,
+  normalizeWhitespace,
+} from "./extract";
 import { isValidPeriod } from "./date";
 
 const app = new Hono();
@@ -63,7 +68,7 @@ app.get("/ics", async (context) => {
     throw new HTTPException(400, { message: "date not found" });
   }
   const event = {
-    title,
+    title: normalizeWhitespace(title),
     candidateDates: dates,
     url: encodedUrl,
   };
