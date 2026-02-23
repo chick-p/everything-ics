@@ -21,6 +21,7 @@ updates:
     groups:
       eslint:
         patterns:
+          - "@eslint/*"
           - "eslint"
           - "prettier"
           - "eslint-config-*"
