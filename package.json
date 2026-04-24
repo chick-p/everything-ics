@@ -16,7 +16,7 @@
     "fix:stylelint": "pnpm run lint:stylelint -- --fix"
   },
   "dependencies": {
-    "hono": "^4.12.14"
+    "hono": "^4.12.15"
   },
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.12.20",
