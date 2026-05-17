@@ -25,7 +25,7 @@ jobs:
         run: echo "::add-mask::${{ secrets.CF_WORKERS_URL }}"
 
       - name: Deploy
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           apiToken: ${{ secrets.CF_API_TOKEN }}
