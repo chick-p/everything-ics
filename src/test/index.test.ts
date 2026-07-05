@@ -1,5 +1,4 @@
-import { fetchMock } from "cloudflare:test";
-import { describe, it, expect, beforeAll } from "vitest";
+import { describe, it, expect, beforeAll, afterAll, vi } from "vitest";
 
 import app from "../index";
 
@@ -18,12 +17,28 @@ describe("GET /", () => {
 describe("GET /ics", () => {
   beforeAll(() => {
     // mock cloudflare workers fetch
-    fetchMock.activate();
-    fetchMock.disableNetConnect();
-    const origin = fetchMock.get(exampleServer);
-    origin.intercept({ method: "GET", path: "/404" }).reply(404, "not found");
-    origin.intercept({ method: "GET", path: "/nodate" }).reply(200, "no date");
-    origin.intercept({ method: "GET", path: "/date" }).reply(200, "3月9日");
+    vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = new URL(
+        input instanceof Request ? input.url : input.toString(),
+      );
+      if (url.origin !== exampleServer) {
+        throw new Error(`Unexpected fetch to ${url}`);
+      }
+      switch (url.pathname) {
+        case "/404":
+          return new Response("not found", { status: 404 });
+        case "/nodate":
+          return new Response("no date", { status: 200 });
+        case "/date":
+          return new Response("3月9日", { status: 200 });
+        default:
+          throw new Error(`Unexpected fetch path ${url.pathname}`);
+      }
+    });
+  });
+
+  afterAll(() => {
+    vi.restoreAllMocks();
   });
 
   it("should be 400 when url is undefined", async () => {
