@@ -20,7 +20,7 @@
     "hono": "^4.12.27"
   },
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.12.20",
+    "@cloudflare/vitest-pool-workers": "^0.17.0",
     "@cloudflare/workers-types": "^4.20260701.1",
     "@eslint/js": "^10.0.1",
     "esbuild": "^0.28.1",
@@ -31,7 +31,7 @@
     "stylelint": "^17.14.0",
     "stylelint-config-standard": "^40.0.0",
     "typescript-eslint": "8.62.1",
-    "vitest": "^3.2.6",
+    "vitest": "^4.1.0",
     "wrangler": "^4.107.0"
   }
 }
