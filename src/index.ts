@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { getCookie, setCookie } from "hono/cookie";
-import { serveStatic } from "hono/cloudflare-workers";
+import { serveStatic } from "@hono/cloudflare-workers";
 import { HTTPException } from "hono/http-exception";
 import manifest from "__STATIC_CONTENT_MANIFEST";
 
