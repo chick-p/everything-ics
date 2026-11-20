@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@hono/cloudflare-workers": "^1.0.1",
-    "hono": "^4.13.17"
+    "hono": "^4.13.19"
   },
   "devDependencies": {
     "@cloudflare/vitest-plugin": "^1.7.0",
